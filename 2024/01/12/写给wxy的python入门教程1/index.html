@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://morandave.github.io/2024/01/12/%E5%86%99%E7%BB%99wxy%E7%9A%84python%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B1/version-17051342585421.png">
 <meta property="article:published_time" content="2024-01-12T02:43:55.000Z">
-<meta property="article:modified_time" content="2024-01-13T08:27:29.614Z">
+<meta property="article:modified_time" content="2024-01-13T08:28:13.729Z">
 <meta property="article:author" content="Moran">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
@@ -213,7 +213,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-13 16:27:29" itemprop="dateModified" datetime="2024-01-13T16:27:29+08:00">2024-01-13</time>
+                <time title="修改时间：2024-01-13 16:28:13" itemprop="dateModified" datetime="2024-01-13T16:28:13+08:00">2024-01-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -257,7 +257,10 @@ f(编程语言代码)=一段01二进制码
 <p>Ananconda是python环境搭建中一个绕不开的工具，解释Anaconda的重要性就需要理解软件的<strong>版本</strong>这一概念。听起来是一个很高级的概念，确实很高级，但也很容易懂。举个例子：朱老师要做两个用python写的项目，一是给小学生做一个计算器，二是给中学生做一个计算器。朱老师没有同时做两个项目，而是打算先做小学生的计算器，之后在小学生计算器的基础上添加一些功能来实现中学生的计算机。为此朱老师写了一个给小学生用的计算器（里面实现了加减乘除运算），朱老师把这个给小学生用的计算器称为“计算器1.0”，之后呢朱老师又向这个计算器里添加了sin、cos计算和虚数运算，这样就可以给中学生用了，朱老师将增加功能后的计算器称为“计算器2.0”。噔噔，朱老师实现了计算器的版本更新。</p>
 <p>那么，请聪明的wxy想一想，在上面这个故事里有没有隐藏着什么问题呢？</p>
 <p>如果朱老师觉得中学生很厉害，什么数的加法都应该可以口算出来，根本不需要使用计算器来计算加法，把计算器2.0中的加法功能去除了怎么办，这样就导致了一个问题：就是在低版本里拥有的功能在高版本里反而没有了。这样就会产生<strong>版本冲突</strong>，那就是<em>使用高版本的用户</em>想使用<em>低版本的功能</em>时发现无法使用。其实版本冲突的含义远不止这些，但从上面这个例子就可以看出，软件版本这个概念非常重要，直接关系到软件能否正常运行。</p>
-<p><img src="version-17051342585421.png" /></p>
+<figure>
+<img src="version-17051342585421.png" alt="image" />
+<figcaption aria-hidden="true">image</figcaption>
+</figure>
 <p>为此，Anaconda提供了一个解决方案:以项目为管理单位，每个项目使用自己要使用的软件版本，项目与项目之间相互独立，互不冲突，甚至每个项目使用的python版本也不同（python也是会有版本迭代的，只要是软件都会有，没有人能一开始就做的尽善尽美）。这样，python的使用者就可以使用不同版本的python乃至python库了（之后再介绍python库是什么）。</p>
 <h3 id="vscode的安装">VSCode的安装</h3>
 <p>VSCode是一个集成开发环境（Integrated Development
