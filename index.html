@@ -202,7 +202,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-01-13 10:56:11 / 修改时间：11:11:05" itemprop="dateCreated datePublished" datetime="2024-01-13T10:56:11+08:00">2024-01-13</time>
+              <time title="创建时间：2024-01-13 10:56:11 / 修改时间：11:24:09" itemprop="dateCreated datePublished" datetime="2024-01-13T10:56:11+08:00">2024-01-13</time>
             </span>
 
           
@@ -223,6 +223,11 @@ Package的时候，PyCharm都会自动为你新建一个__init__.py文件。这�
 <p>**当我们从一个package里面调用东西的时候，该__init__.py文件内的代码会被首先执行。**</p>
 <p>init可以控制包中代码的封装程度，什么可以被外界访问，什么不可以由__init__.py来掌控。</p>
 <p>.代表当前所处package</p>
+<h1 id="python项目中导入机制的使用">python项目中导入机制的使用</h1>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">library</span><br><span class="line">├── package1</span><br><span class="line">|   ├── __init__.py</span><br><span class="line">|   ├── module1.py</span><br><span class="line">├── package2</span><br><span class="line">|   ├── __init__.py</span><br><span class="line">|   ├── module1.py</span><br><span class="line">├── __init__.py</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">library.init.py</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> package1</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> package2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">package1.__init__.py</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">from .module1 import *</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">package2.__init__.py</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">from .module1 import *</span><br></pre></td></tr></table></figure>
 <hr />
 <blockquote>
 <p><strong>本文作者</strong>：moran</p>
