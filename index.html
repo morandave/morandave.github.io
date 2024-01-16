@@ -178,6 +178,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://morandave.github.io/2024/01/16/%E5%86%99%E7%BB%99wxy%E7%9A%84python%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="Moran">
+      <meta itemprop="description" content="选择有时候比努力更重要">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="斋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/16/%E5%86%99%E7%BB%99wxy%E7%9A%84python%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B2/" class="post-title-link" itemprop="url">写给wxy的python入门教程（二）——基本语法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-16 15:43:36" itemprop="dateCreated datePublished" datetime="2024-01-16T15:43:36+08:00">2024-01-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>关键词：变量 数据类型 函数 逻辑语句</strong></p>
+<p>[TOC]</p>
+<h1 id="helloworld">Hello,world</h1>
+<p>学习任何编程语言的第一步（搭好编程环境后）一定是尝试输出Hello
+world，它可以验证编程环境是否搭建完成，同时也是学习一门编程语言语法开始的地方。python的Hello
+world程序如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello world!&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>非常简洁，只有一行代码，即可实现在终端输出Hello world!</p>
+<p>这个程序实际上只有一行，使用了一个<strong>函数</strong>：print(),函数是编程中一个非常重要的概念，我们先将这个概念放一放，现阶段只需要知道print()函数的作用是将括号内的东西打印到终端。（不知道你懂不懂“打印到终端什么意思，不懂到时候记得问”）</p>
+<h1 id="变量">变量</h1>
+<p><strong>变量</strong>，一个编程中和<strong>函数</strong>同样重要的概念。变量变量，重点在于会变，你只要命名了一个变量，就可以给它赋上任何值（python里是这样，其他编程语言并非如此）。变量是由你创造出来的事物，你想让它是什么就是什么（你可以随时改变它的值）。但是呢，也不是那么随意的，你不能直接用“x=人”这句代码来让x代表一个人，实际上确实有方法来让x代表一个人，但是那需要一些更高级的语法，而更高级的语法是由低级语法一步步扩展得到的，下面我们来看看低级语法是什么样的，看看x在最低层级上可以表达什么，<strong>有哪些东西是最基础的，可以用这些基础的东西来逐步表示诸如“人”这样的高级概念</strong>。</p>
+<p>到这里停一下，请聪明的你动动脑筋，可能会有哪些“基础变量”，提示一个思路：需要表示一个人需要哪些东西？人有年龄、性别、姓名、身高等等属性，要表示这些东西需要哪些东西来描述它们呢？</p>
+<h2 id="数字">数字</h2>
+<p>聪明的你应该想到了，是数字，数字是描述这个世界必不可少的工具，编程语言要想描述这个世界也需要数字。python中对于数字的处理做的非常好。你只需要像做数学题一样把计算过程写出来就可以使用数字了，举个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">5</span></span><br><span class="line"><span class="built_in">print</span>(x) </span><br><span class="line"></span><br><span class="line">y = <span class="number">3.14</span></span><br><span class="line"><span class="built_in">print</span>(y)  </span><br><span class="line"></span><br><span class="line">height = <span class="number">5</span></span><br><span class="line">weight = <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(height + weight)  <span class="comment"># 加法</span></span><br><span class="line"><span class="built_in">print</span>(height - weight)  <span class="comment"># 减法</span></span><br><span class="line"><span class="built_in">print</span>(height * weight)  <span class="comment"># 乘法</span></span><br><span class="line"><span class="built_in">print</span>(height / weight)  <span class="comment"># 除法</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x = <span class="number">2</span></span><br><span class="line">y = <span class="number">3</span></span><br><span class="line"><span class="built_in">print</span>(x ** y)  <span class="comment"># 幂运算，2的3次方是8</span></span><br><span class="line"><span class="built_in">print</span>(a % b)   <span class="comment"># 取余运算，2除以3的余数为2</span></span><br><span class="line"></span><br><span class="line">BMI = weight/(height**<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(BMI)</span><br></pre></td></tr></table></figure>
+<p>上面就是一些基本的python数字运算啦你可能会好奇，为什么要单独举个例子“y
+=
+3.14”，实际上，小数在编程语言中有个专门的概念叫<strong>浮点数</strong>，至于为什么叫浮点数，这个涉及到计算机底层的知识，如果你感兴趣的单独问我。浮点数在其他编程语言中会有明细的划分，但在python中，你只需要把它和整数当成一个概念就行，当成数字来用就ok。</p>
+<p>你应该注意到了，朱老师上面用了<code>weight</code>和<code>height</code>这两个变量名，朱老师是怕你产生一个一个误解，认为变量的名字只能用x、y这种字母，实际上，变量名的作用是方便编程人员的阅读，所以变量名设计的原则就是要一眼可以读懂变量所代表的东西，比如使用了weight这个变量名，那么别人一看到就知道，这个变量中存的是体重，那么这个weight中存的应该是数字，而不是其他东西。</p>
+<p>像“+-
+*/”这些东西在python中称为<strong>运算符</strong>，顾名思义，是用来运算的，配合着数字变量使用就可以实现算数运算。</p>
+<h2 id="字符串">字符串</h2>
+<h2 id="变量的命名与使用">变量的命名与使用</h2>
+<h1 id="简单数据类型">简单数据类型</h1>
+<h1 id="逻辑语句">逻辑语句</h1>
+<h1 id="函数">函数</h1>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://morandave.github.io/2024/01/16/Adaline%E7%9A%84%E5%AE%9E%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -836,7 +919,7 @@ x的平方前面的m就是函数的参数，x对应的是模型的输入（比�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
