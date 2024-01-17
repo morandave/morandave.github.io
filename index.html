@@ -295,10 +295,16 @@ world程序如下：</p>
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-01-16 11:16:48 / 修改时间：20:50:29" itemprop="dateCreated datePublished" datetime="2024-01-16T11:16:48+08:00">2024-01-16</time>
+              <time title="创建时间：2024-01-16 11:16:48" itemprop="dateCreated datePublished" datetime="2024-01-16T11:16:48+08:00">2024-01-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-17 10:07:08" itemprop="dateModified" datetime="2024-01-17T10:07:08+08:00">2024-01-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -336,17 +342,6 @@ world程序如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;加法算子&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Add</span>(<span class="title class_ inherited__">Operator</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    （多个）矩阵加法</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">compute</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># assert len(self.parents) == 2 and self.parents[0].shape() == self.parents[1].shape()</span></span><br><span class="line">        self.value = np.mat(np.zeros(self.parents[<span class="number">0</span>].shape()))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> parent <span class="keyword">in</span> self.parents:</span><br><span class="line">            self.value += parent.value</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_jacobi</span>(<span class="params">self, parent</span>):</span><br><span class="line">        <span class="keyword">return</span> np.mat(np.eye(self.dimension()))  <span class="comment"># 矩阵之和对其中任一个矩阵的雅可比矩阵是单位矩阵</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MatMul</span>(<span class="title class_ inherited__">Operator</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    矩阵乘法</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">compute</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">assert</span> <span class="built_in">len</span>(self.parents) == <span class="number">2</span> <span class="keyword">and</span> self.parents[<span class="number">0</span>].shape()[</span><br><span class="line">            <span class="number">1</span>] == self.parents[<span class="number">1</span>].shape()[<span class="number">0</span>]</span><br><span class="line">        self.value = self.parents[<span class="number">0</span>].value * self.parents[<span class="number">1</span>].value</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_jacobi</span>(<span class="params">self, parent</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        将矩阵乘法视作映射，求映射对参与计算的矩阵的雅克比矩阵。</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 很神秘，靠注释说不明白了</span></span><br><span class="line">        zeros = np.mat(np.zeros((self.dimension(), parent.dimension())))</span><br><span class="line">        <span class="keyword">if</span> parent <span class="keyword">is</span> self.parents[<span class="number">0</span>]:</span><br><span class="line">            <span class="keyword">return</span> fill_diagonal(zeros, self.parents[<span class="number">1</span>].value.T)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            jacobi = fill_diagonal(zeros, self.parents[<span class="number">0</span>].value)</span><br><span class="line">            row_sort = np.arange(self.dimension()).reshape(</span><br><span class="line">                self.shape()[::-<span class="number">1</span>]).T.ravel()</span><br><span class="line">            col_sort = np.arange(parent.dimension()).reshape(</span><br><span class="line">                parent.shape()[::-<span class="number">1</span>]).T.ravel()</span><br><span class="line">            <span class="keyword">return</span> jacobi[row_sort, :][:, col_sort]</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">PerceptionLoss</span>(<span class="title class_ inherited__">LossFunction</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    感知机损失，输入为正时为0，输入为负时为输入的相反数</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">compute</span>(<span class="params">self</span>):</span><br><span class="line">        self.value = np.mat(np.where(</span><br><span class="line">            self.parents[<span class="number">0</span>].value &gt;= <span class="number">0.0</span>, <span class="number">0.0</span>, -self.parents[<span class="number">0</span>].value))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_jacobi</span>(<span class="params">self, parent</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        雅克比矩阵为对角阵，每个对角线元素对应一个父节点元素。若父节点元素大于0，则</span></span><br><span class="line"><span class="string">        相应对角线元素（偏导数）为0，否则为-1。</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        diag = np.where(parent.value &gt;= <span class="number">0.0</span>, <span class="number">0.0</span>, -<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> np.diag(diag.ravel())</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<hr />
-<hr />
-<blockquote>
-<p><strong>本文作者</strong>：moran</p>
-<p><strong>本文链接：</strong><a
-target="_blank" rel="noopener" href="https://moranzhu.site/2024/01/13/python的导入机制/">python的导入机制
-| 斋 (moranzhu.site)</a></p>
-<p><strong>版权声明</strong>:本博客所有文章除特别声明外，均采用<a
-target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
-4.0</a>许可协议。转载请注明来自moran并附上出处链接及本声明。</p>
-</blockquote>
 
       
     </div>
@@ -397,7 +392,7 @@ target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-15 10:57:04" itemprop="dateModified" datetime="2024-01-15T10:57:04+08:00">2024-01-15</time>
+                <time title="修改时间：2024-01-17 10:07:19" itemprop="dateModified" datetime="2024-01-17T10:07:19+08:00">2024-01-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -432,16 +427,6 @@ Package的时候，PyCharm都会自动为你新建一个__init__.py文件。这�
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">library.init.py</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> package1</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> package2</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">package1.__init__.py</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">from .module1 import *</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">package2.__init__.py</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">from .module1 import *</span><br></pre></td></tr></table></figure>
-<hr />
-<blockquote>
-<p><strong>本文作者</strong>：moran</p>
-<p><strong>本文链接：</strong><a
-target="_blank" rel="noopener" href="https://moranzhu.site/2024/01/13/python的导入机制/">python的导入机制
-| 斋 (moranzhu.site)</a></p>
-<p><strong>版权声明</strong>:本博客所有文章除特别声明外，均采用<a
-target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
-4.0</a>许可协议。转载请注明来自moran并附上出处链接及本声明。</p>
-</blockquote>
 
       
     </div>
@@ -599,7 +584,7 @@ Environment）。集成开发环境是什么？</p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-16 20:49:39" itemprop="dateModified" datetime="2024-01-16T20:49:39+08:00">2024-01-16</time>
+                <time title="修改时间：2024-01-17 10:07:26" itemprop="dateModified" datetime="2024-01-17T10:07:26+08:00">2024-01-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -637,17 +622,6 @@ Environment）。集成开发环境是什么？</p>
 ：反向传播，计算结果节点对本节点的雅可比矩阵</p>
 <h2 id="反向传播的实现">反向传播的实现</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">backward</span>(<span class="params">self, result</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    计算结果节点对本节点的雅可比矩阵</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> self.jacobi <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">		<span class="keyword">if</span> self <span class="keyword">is</span> result:</span><br><span class="line">           self.jacobi = np.mat(np.eye(self.dimension()))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.jacobi = np.zeros((result.dimension(),self.dimension()))</span><br><span class="line">            <span class="keyword">for</span> child <span class="keyword">in</span> self.get_children():</span><br><span class="line">                <span class="keyword">if</span> child.value <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                    self.jacobi += child.backward(result) * child.get_jacobi(self)</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
-<hr />
-<hr />
-<blockquote>
-<p><strong>本文作者</strong>：moran</p>
-<p><strong>本文链接：</strong><a
-target="_blank" rel="noopener" href="https://moranzhu.site/2024/01/13/python的导入机制/">python的导入机制
-| 斋 (moranzhu.site)</a></p>
-<p><strong>版权声明</strong>:本博客所有文章除特别声明外，均采用<a
-target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA
-4.0</a>许可协议。转载请注明来自moran并附上出处链接及本声明。</p>
-</blockquote>
 
       
     </div>
