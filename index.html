@@ -178,6 +178,109 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://morandave.github.io/2024/01/17/python%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95-%E6%96%AD%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="moran">
+      <meta itemprop="description" content="选择有时候比努力更重要">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="斋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/17/python%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95-%E6%96%AD%E8%A8%80/" class="post-title-link" itemprop="url">python进阶语法--断言</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-17 16:18:23" itemprop="dateCreated datePublished" datetime="2024-01-17T16:18:23+08:00">2024-01-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="assertion">assertion</h1>
+<p>当你在学习Python时遇到关键词
+<code>assert</code>，它是用于进行断言检查的关键词。</p>
+<p>断言（assertion）是一种在程序中用于检查是否满足某个条件的语句。它用于在代码中标记出一个必须为真的条件，如果条件不满足，那么程序会引发一个断言错误（AssertionError）。</p>
+<p><code>assert</code> 语句的一般形式是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span> 条件, 错误信息</span><br></pre></td></tr></table></figure>
+<p>其中，<code>条件</code>
+是一个布尔表达式，表示需要进行检查的条件。如果条件为真，那么程序会继续执行；如果条件为假，那么程序会引发
+<code>AssertionError</code> 异常，并输出可选的
+<code>错误信息</code>。</p>
+<p>断言通常用于在程序中检查一些基本的假设，以确保程序在运行时的关键点上具有期望的状态。如果断言失败，那么说明程序的某些方面出现了问题，需要进行调试和修复。</p>
+<p>需要注意的是，在正式发布的程序中，断言通常会被禁用，因为它们会在运行时引发错误。但在开发和调试阶段，断言是非常有用的，可以帮助开发人员捕获潜在的问题和错误。</p>
+<p>下面是一个使用 <code>assert</code> 的简单示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">divide</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="keyword">assert</span> b != <span class="number">0</span>, <span class="string">&quot;除数不能为0&quot;</span></span><br><span class="line">    <span class="keyword">return</span> a / b</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(divide(<span class="number">10</span>, <span class="number">2</span>))  <span class="comment"># 正常执行，输出 5.0</span></span><br><span class="line"><span class="built_in">print</span>(divide(<span class="number">10</span>, <span class="number">0</span>))  <span class="comment"># 断言失败，引发 AssertionError，并输出错误信息</span></span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，<code>assert b != 0</code> 用于检查除数
+<code>b</code> 是否为零，如果是零，那么会引发断言错误，并输出错误信息
+"除数不能为0"。</p>
+<h1 id="举个例子">举个例子</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span> <span class="built_in">isinstance</span>(target, Node) <span class="keyword">and</span> <span class="built_in">isinstance</span>(graph, Graph)</span><br></pre></td></tr></table></figure>
+<p>以上代码的作用是在运行时检查 <code>target</code> 和
+<code>graph</code> 对象的类型是否符合预期。</p>
+<ul>
+<li><code>assert isinstance(target, Node)</code> 用于检查
+<code>target</code> 是否是 <code>Node</code> 类型的实例。如果
+<code>target</code> 不是 <code>Node</code>
+类型的实例，那么断言会失败，引发 <code>AssertionError</code> 异常。</li>
+<li><code>assert isinstance(graph, Graph)</code> 用于检查
+<code>graph</code> 是否是 <code>Graph</code> 类型的实例。如果
+<code>graph</code> 不是 <code>Graph</code>
+类型的实例，那么断言会失败，引发 <code>AssertionError</code> 异常。</li>
+</ul>
+<p>这些断言语句的目的是确保在执行后续的代码之前，<code>target</code> 和
+<code>graph</code>
+的类型是正确的。如果断言失败，那么说明程序中的某些部分可能存在错误，需要进行调试和修复。</p>
+<p>这样的断言检查通常在代码中的关键点或者函数的入口处使用，以确保传入的参数满足预期的类型要求。通过这种方式，可以提前捕获类型错误，加强代码的健壮性和可维护性。</p>
+<p>需要注意的是，断言语句在运行时默认是启用的，但可以通过设置 Python
+解释器的优化级别或使用命令行参数来禁用它们。因此，在发布程序时，这些断言语句可能会被忽略或删除，以提高性能。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://morandave.github.io/2024/01/17/%E4%BC%98%E5%8C%96%E5%99%A8%E7%B1%BB%E7%9A%84%E5%AE%9E%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1003,7 +1106,7 @@ x的平方前面的m就是函数的参数，x对应的是模型的输入（比�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
