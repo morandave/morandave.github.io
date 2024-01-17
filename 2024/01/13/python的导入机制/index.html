@@ -29,7 +29,7 @@
 <meta property="og:description" content="关键词：moudule package library __init__文件 对于一个python项目，里面的每一个文件夹都可以认为是一个package，而每一个.py文件被认为是一个module。如果你用的IDE是PyCharm，那么当你新建一个Python Package的时候，PyCharm都会自动为你新建一个__init__.py文件。这个__init__.py文件可以看作这个pac">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-13T02:56:11.000Z">
-<meta property="article:modified_time" content="2024-01-17T02:07:19.320Z">
+<meta property="article:modified_time" content="2024-01-17T08:23:16.166Z">
 <meta property="article:author" content="moran">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-17 10:07:19" itemprop="dateModified" datetime="2024-01-17T10:07:19+08:00">2024-01-17</time>
+                <time title="修改时间：2024-01-17 16:23:16" itemprop="dateModified" datetime="2024-01-17T16:23:16+08:00">2024-01-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -254,6 +254,7 @@ Package的时候，PyCharm都会自动为你新建一个__init__.py文件。这�
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">library.init.py</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> package1</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> package2</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">package1.__init__.py</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">from .module1 import *</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">package2.__init__.py</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">from .module1 import *</span><br></pre></td></tr></table></figure>
+<hr />
 
     </div>
 
