@@ -178,6 +178,78 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://morandave.github.io/2024/01/17/%E4%BC%98%E5%8C%96%E5%99%A8%E7%B1%BB%E7%9A%84%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="moran">
+      <meta itemprop="description" content="选择有时候比努力更重要">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="斋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/17/%E4%BC%98%E5%8C%96%E5%99%A8%E7%B1%BB%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">优化器类的实现</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-17 16:04:39" itemprop="dateCreated datePublished" datetime="2024-01-17T16:04:39+08:00">2024-01-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%94%A8python%E5%AE%9E%E7%8E%B0%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">用python实现深度学习框架</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="优化器类的实现">优化器类的实现</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Optimizer</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    优化器基类</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, graph, target, learning_rate=<span class="number">0.01</span></span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        优化器的构造函数接受计算图对象，目标节点对象以及学习率</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">assert</span> <span class="built_in">isinstance</span>(target, Node) <span class="keyword">and</span> <span class="built_in">isinstance</span>(graph, Graph)</span><br><span class="line">        self.graph = graph</span><br><span class="line">        self.target = target</span><br><span class="line">        self.learning_rate = learning_rate</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 为每个参与训练的节点累加一个Mini Batch的全部样本的梯度</span></span><br><span class="line">        self.acc_gradient = <span class="built_in">dict</span>()</span><br><span class="line">        self.acc_no = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">one_step</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        计算并累加样本的梯度</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.forward_backward()</span><br><span class="line">        self.acc_no += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_gradient</span>(<span class="params">self, node</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        返回样本的平均梯度</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">assert</span> node <span class="keyword">in</span> self.acc_gradient</span><br><span class="line">        <span class="keyword">return</span> self.acc_gradient[node] / self.acc_no</span><br><span class="line"></span><br><span class="line"><span class="meta">    @abc.abstractmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_update</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        抽象方法，执行具体的梯度更新算法，由子类实现</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">apply_gradients</span>(<span class="params">self, node_gradients_dict, summarize=<span class="literal">False</span>, acc_no=<span class="literal">None</span></span>):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> node, gradient <span class="keyword">in</span> node_gradients_dict.items():</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">isinstance</span>(node, Node):</span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                target_node = get_node_from_graph(node)</span><br><span class="line">                <span class="keyword">assert</span> target_node <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span></span><br><span class="line">                <span class="keyword">assert</span> self.acc_gradient[target_node].shape == gradient.shape</span><br><span class="line">                <span class="keyword">if</span> summarize:</span><br><span class="line">                    self.acc_gradient[target_node] += gradient</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    self.acc_gradient[target_node] = gradient</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> summarize:</span><br><span class="line">            self.acc_no += acc_no</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> acc_no <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                <span class="comment"># 传入的是平均梯度, 强制让acc_no变为1，避免梯度更新时重复平均</span></span><br><span class="line">                self.acc_no = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                self.acc_no = acc_no</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">update</span>(<span class="params">self, var_gradients=<span class="literal">None</span></span>):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> var_gradients <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            self.apply_gradients(var_gradients)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 执行更新</span></span><br><span class="line">        self._update()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 清除累加梯度</span></span><br><span class="line">        self.acc_gradient.clear()</span><br><span class="line">        self.acc_no = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward_backward</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        前向传播计算结果节点的值并反向传播计算结果节点对各个节点的雅可比矩阵</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 清除计算图中所有节点的雅可比矩阵</span></span><br><span class="line">        self.graph.clear_jacobi()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 前向传播计算结果节点</span></span><br><span class="line">        self.target.forward()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 反向传播计算雅可比矩阵</span></span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> self.graph.nodes:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">isinstance</span>(node, Variable) <span class="keyword">and</span> node.trainable:</span><br><span class="line">                node.backward(self.target)</span><br><span class="line"></span><br><span class="line">                <span class="comment"># 最终结果（标量）对节点值的雅可比是一个行向量，其转置是梯度（列向量）</span></span><br><span class="line">                <span class="comment"># 这里将梯度reshape成与节点值相同的形状，好对节点值进行更新。</span></span><br><span class="line">                gradient = node.jacobi.T.reshape(node.shape())</span><br><span class="line">                <span class="keyword">if</span> node <span class="keyword">not</span> <span class="keyword">in</span> self.acc_gradient:</span><br><span class="line">                    self.acc_gradient[node] = gradient</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    self.acc_gradient[node] += gradient</span><br></pre></td></tr></table></figure>
+<p><code>Optimizer</code>类的构造函数接受一个<code>Graph</code>类对象和一个目标节点对象（一般是损失值节点），即视作结果的节点（为了简单起见，MatrixSlow框架只支持优化一个目标节点）作为参数。对于机器学习模型的训练来说，就是取损失值节点作为目标节点。<code>learning_rate</code>参数用来指定学习率。<code>Optimizer</code>类的<code>acc_gradient</code>属性是一个字典，将来它会以变量节点对象为key，累加目标节点对该变量节点的梯度。<code>acc_no</code>属性是一个计数器。这两个属性的作用是什么？后面讲解各种梯度下降法的变体时自会明了。</p>
+<p><code>one_step</code>方法是优化器类的<strong>执行入口</strong>，它的实现很简单：先调用<code>forward_backward</code>方法，再将<code>acc_no</code>计数器加一。<code>forward_backward</code>方法抽象了优化过程的前两步，从它的名字就可以看出，它完成的是一次前向传播和反向传播。这个方法先调用目标节点的<code>forward</code>方法完成前向传播，然后再遍历计算图中的所有节点，找出其中类型是<code>Variable</code>且参加训练的节点，依次调用这些节点的<code>backward</code>方法执行反向传播，从而计算出目标节点对它们的雅
+可比矩阵。将雅可比矩阵转置后就是目标节点对某变量节点的梯度，再将梯度变形并累加到<code>acc_gradient</code>中。</p>
+<p><code>update</code>方法封装了优化过程的第三步：参数更新。在<code>Optimizer</code>类中，<code>update</code>方法调用的是<code>_update</code>抽象方法。<code>_update</code>方法由具体的优化器子类覆盖实现。执行完<code>_update</code>方法后，清空累加器<code>acc_gradient</code>并将<code>acc_no</code>计数器也清零。<code>get_gradient</code>是一个辅助性的方法，它返回的是当前梯度累加器的平均梯度。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://morandave.github.io/2024/01/16/%E5%86%99%E7%BB%99wxy%E7%9A%84python%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -931,7 +1003,7 @@ x的平方前面的m就是函数的参数，x对应的是模型的输入（比�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
