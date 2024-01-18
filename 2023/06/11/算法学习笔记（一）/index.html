@@ -29,7 +29,7 @@
 <meta property="og:description" content="思想 数据结构要从内存空间和对内存空间的操作两方面来思考。内存空间：任何的数据结构都要用来存储数据，只不过用的方式不同，有的直接按顺序利用内存空间，比如数组；有的则是会用指针来方便对内存的操作，例如链表为了方便插入和删除采用指针。对内存空间的操作：对内存空间的操作主要是由函数来实现，不同的数据结构会有不同的函数来对内存空间进行特定的操作。 动态规划 核心：把原问题分解为相对简单的子问题 进">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-11T02:07:52.000Z">
-<meta property="article:modified_time" content="2023-11-30T02:57:28.603Z">
+<meta property="article:modified_time" content="2024-01-18T12:55:42.431Z">
 <meta property="article:author" content="moran">
 <meta property="article:tag" content="algorithm">
 <meta name="twitter:card" content="summary">
@@ -212,7 +212,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-30 10:57:28" itemprop="dateModified" datetime="2023-11-30T10:57:28+08:00">2023-11-30</time>
+                <time title="修改时间：2024-01-18 20:55:42" itemprop="dateModified" datetime="2024-01-18T20:55:42+08:00">2024-01-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -253,6 +253,9 @@
 <p>数字、字母、ascll码：字母和ascll码之间的对应关系可以产生数字</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//字符减字符当数字使用</span></span><br><span class="line">nums[i]-<span class="string">&#x27;0&#x27;</span></span><br><span class="line">nums[i]-<span class="string">&#x27;A&#x27;</span>+<span class="number">10</span></span><br></pre></td></tr></table></figure>
 <p>卷积层本质上也是一个数据结构，也会占用内存空间，也有自己的操作</p>
+<h1 id="链表神器虚拟头节点">链表神器——虚拟头节点</h1>
+<p>用途：方便头节点的删除</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"> * <span class="keyword">struct</span> <span class="title class_">ListNode</span> &#123;</span><br><span class="line"> *     <span class="type">int</span> val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     <span class="built_in">ListNode</span>() : <span class="built_in">val</span>(<span class="number">0</span>), <span class="built_in">next</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line"> *     <span class="built_in">ListNode</span>(<span class="type">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">next</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line"> *     <span class="built_in">ListNode</span>(<span class="type">int</span> x, ListNode *next) : <span class="built_in">val</span>(x), <span class="built_in">next</span>(next) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line">ListNode* dummyHead = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>); <span class="comment">// 设置一个虚拟头结点</span></span><br><span class="line">dummyHead-&gt;next = head; <span class="comment">// 将虚拟头结点指向head，这样方便后面做删除操作</span></span><br><span class="line">ListNode* cur = dummyHead;</span><br><span class="line"><span class="keyword">while</span> (cur-&gt;next != <span class="literal">NULL</span>) &#123;<span class="comment">// 遍历链表</span></span><br><span class="line">	<span class="keyword">if</span>(cur-&gt;next-&gt;val == val) &#123;</span><br><span class="line">		ListNode* tmp = cur-&gt;next;</span><br><span class="line">		cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line"> 		<span class="keyword">delete</span> tmp;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  		cur = cur-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">head = dummyHead-&gt;next;</span><br><span class="line"><span class="keyword">delete</span> dummyHead;</span><br><span class="line"><span class="keyword">return</span> head;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -351,7 +354,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E6%83%B3"><span class="nav-number">1.</span> <span class="nav-text">思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-number">2.</span> <span class="nav-text">动态规划</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E5%88%B6%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">进制相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2"><span class="nav-number">3.1.</span> <span class="nav-text">进制转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">3.2.</span> <span class="nav-text">十六进制的表示</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E6%83%B3"><span class="nav-number">1.</span> <span class="nav-text">思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-number">2.</span> <span class="nav-text">动态规划</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E5%88%B6%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">进制相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2"><span class="nav-number">3.1.</span> <span class="nav-text">进制转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">3.2.</span> <span class="nav-text">十六进制的表示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E7%A5%9E%E5%99%A8%E8%99%9A%E6%8B%9F%E5%A4%B4%E8%8A%82%E7%82%B9"><span class="nav-number">4.</span> <span class="nav-text">链表神器——虚拟头节点</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
