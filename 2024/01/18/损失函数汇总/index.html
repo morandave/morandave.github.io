@@ -21,22 +21,23 @@
     var CONFIG = {"hostname":"morandave.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="编程语言运行环境 无论是谁，想要学习一门编程语言，第一步都是在自己的计算机上搭建这门编程语言的运行环境。虽说用了搭建这个词，听起来似乎非常复杂，非常的高大上，但实际上不过是下载了一些初学者不太懂的东西，不妨把它理解为一个个软件。那么所谓的搭建编程语言运行环境就可以简单理解为在你的计算机里下载了几个软件，仅此而已。 为什么需要有编程语言运行环境？ 这个问题涉及到一个基本的知识：计算机只能运行0">
+  <meta name="description" content="感知机损失节点 代码实现 12345678910111213141516class PerceptionLoss(LossFunction):    &quot;&quot;&quot;    感知机损失，输入为正时为0，输入为负时为输入的相反数    &quot;&quot;&quot;    def compute(self):        self.value &#x3D; np.mat(np.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="写给wxy的python入门教程（一）——环境搭建">
-<meta property="og:url" content="https://morandave.github.io/2024/01/12/%E5%86%99%E7%BB%99wxy%E7%9A%84python%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B1/index.html">
+<meta property="og:title" content="损失函数汇总">
+<meta property="og:url" content="https://morandave.github.io/2024/01/18/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E6%B1%87%E6%80%BB/index.html">
 <meta property="og:site_name" content="斋">
-<meta property="og:description" content="编程语言运行环境 无论是谁，想要学习一门编程语言，第一步都是在自己的计算机上搭建这门编程语言的运行环境。虽说用了搭建这个词，听起来似乎非常复杂，非常的高大上，但实际上不过是下载了一些初学者不太懂的东西，不妨把它理解为一个个软件。那么所谓的搭建编程语言运行环境就可以简单理解为在你的计算机里下载了几个软件，仅此而已。 为什么需要有编程语言运行环境？ 这个问题涉及到一个基本的知识：计算机只能运行0">
+<meta property="og:description" content="感知机损失节点 代码实现 12345678910111213141516class PerceptionLoss(LossFunction):    &quot;&quot;&quot;    感知机损失，输入为正时为0，输入为负时为输入的相反数    &quot;&quot;&quot;    def compute(self):        self.value &#x3D; np.mat(np.">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://morandave.github.io/2024/01/12/%E5%86%99%E7%BB%99wxy%E7%9A%84python%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B1/images/%E5%86%99%E7%BB%99wxy%E7%9A%84python%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B1/%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81.png">
-<meta property="article:published_time" content="2024-01-12T02:43:55.000Z">
-<meta property="article:modified_time" content="2024-01-17T08:22:52.340Z">
+<meta property="og:image" content="c:/Users/%E6%9C%B1%E6%81%92/AppData/Roaming/Typora/typora-user-images/image-20240118153758639.png">
+<meta property="og:image" content="https://morandave.github.io/2024/01/public/images/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E6%B1%87%E6%80%BB/%E5%AF%B9%E6%95%B0%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0.png">
+<meta property="article:published_time" content="2024-01-18T07:45:06.000Z">
+<meta property="article:modified_time" content="2024-01-18T07:45:06.102Z">
 <meta property="article:author" content="moran">
-<meta property="article:tag" content="python">
+<meta property="article:tag" content="用python实现深度学习框架">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://morandave.github.io/2024/01/12/%E5%86%99%E7%BB%99wxy%E7%9A%84python%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B1/images/%E5%86%99%E7%BB%99wxy%E7%9A%84python%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B1/%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81.png">
+<meta name="twitter:image" content="c:/Users/%E6%9C%B1%E6%81%92/AppData/Roaming/Typora/typora-user-images/image-20240118153758639.png">
 
-<link rel="canonical" href="https://morandave.github.io/2024/01/12/%E5%86%99%E7%BB%99wxy%E7%9A%84python%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B1/">
+<link rel="canonical" href="https://morandave.github.io/2024/01/18/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E6%B1%87%E6%80%BB/">
 
 
 <script id="page-configurations">
@@ -49,7 +50,7 @@
   };
 </script>
 
-  <title>写给wxy的python入门教程（一）——环境搭建 | 斋</title>
+  <title>损失函数汇总 | 斋</title>
   
 
 
@@ -184,7 +185,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://morandave.github.io/2024/01/12/%E5%86%99%E7%BB%99wxy%E7%9A%84python%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B1/">
+    <link itemprop="mainEntityOfPage" href="https://morandave.github.io/2024/01/18/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E6%B1%87%E6%80%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -197,7 +198,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          写给wxy的python入门教程（一）——环境搭建
+          损失函数汇总
         </h1>
 
         <div class="post-meta">
@@ -207,22 +208,15 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2024-01-12 10:43:55" itemprop="dateCreated datePublished" datetime="2024-01-12T10:43:55+08:00">2024-01-12</time>
+              <time title="创建时间：2024-01-18 15:45:06" itemprop="dateCreated datePublished" datetime="2024-01-18T15:45:06+08:00">2024-01-18</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-17 16:22:52" itemprop="dateModified" datetime="2024-01-17T16:22:52+08:00">2024-01-17</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                  <a href="/categories/%E7%94%A8python%E5%AE%9E%E7%8E%B0%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">用python实现深度学习框架</span></a>
                 </span>
             </span>
 
@@ -244,40 +238,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="编程语言运行环境">编程语言运行环境</h1>
-<p>无论是谁，想要学习一门<strong>编程语言</strong>，第一步都是在自己的计算机上搭建这门编程语言的<strong>运行环境</strong>。虽说用了搭建这个词，听起来似乎非常复杂，非常的高大上，但实际上不过是下载了一些初学者不太懂的东西，不妨把它理解为一个个软件。那么所谓的搭建编程语言运行环境就可以简单理解为在你的计算机里下载了几个软件，仅此而已。</p>
-<h2
-id="为什么需要有编程语言运行环境">为什么需要有编程语言运行环境？</h2>
-<p>这个问题涉及到一个基本的知识：计算机只能运行<strong>01二进制码</strong>。这句话的基本解释是，你在电脑中的任何操作，如鼠标点击一下、打开某个软件等等实际上都是你的电脑在运行一段01二进制码。或许有点难懂，但我们可以用初高中函数的思想来简单化这个概念：
-<span class="math display">\[
-f(电脑操作)=一段01二进制码
-\]</span>
-比如你用计算器计算1+2，会对应着电脑运行00101011这段01二进制代码（举个例子）。这样一个函数关系就形成了，电脑操作是自变量，01二进制代码是应变量。</p>
-<p>为什么要说上面这么多东西呢，因为实际上<strong>电脑操作</strong>和<strong>编程语言</strong>是等价的，在计算器这个软件中可以计算1+2，也可以使用python编程语言实现计算1+2，在python代码中一行就可以实现：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">1</span> + <span class="number">2</span></span><br></pre></td></tr></table></figure>
-<p>运行以上python代码的结果就是x这个<strong>变量</strong>被赋上了3这个数字值（之后介绍python语法的时候再详细介绍）。也就是说编程语言=电脑操作，那么之前的那个函数就可以修改为：
-<span class="math display">\[
-f(编程语言代码)=一段01二进制码
-\]</span>
-敲黑板~~(接下来是重点)：编程语言运行环境就是函数f，编程语言运行环境起到了将编程运行代码转化为01二进制代码的功能。<strong>有了编程语言运行环境你的电脑才可以运行代码</strong>（说了这么多其实总结起来就这一句话）。</p>
-<h2 id="实操开始搭建python运行环境">实操：开始搭建python运行环境</h2>
-<h3 id="ananconda">Ananconda</h3>
-<p>Ananconda是python环境搭建中一个绕不开的工具，解释Anaconda的重要性就需要理解软件的<strong>版本</strong>这一概念。听起来是一个很高级的概念，确实很高级，但也很容易懂。举个例子：朱老师要做两个用python写的项目，一是给小学生做一个计算器，二是给中学生做一个计算器。朱老师没有同时做两个项目，而是打算先做小学生的计算器，之后在小学生计算器的基础上添加一些功能来实现中学生的计算机。为此朱老师写了一个给小学生用的计算器（里面实现了加减乘除运算），朱老师把这个给小学生用的计算器称为“计算器1.0”，之后呢朱老师又向这个计算器里添加了sin、cos计算和虚数运算，这样就可以给中学生用了，朱老师将增加功能后的计算器称为“计算器2.0”。噔噔，朱老师实现了计算器的版本更新。</p>
-<p>那么，请聪明的wxy想一想，在上面这个故事里有没有隐藏着什么问题呢？</p>
-<p>如果朱老师觉得中学生很厉害，什么数的加法都应该可以口算出来，根本不需要使用计算器来计算加法，把计算器2.0中的加法功能去除了怎么办，这样就导致了一个问题：就是在低版本里拥有的功能在高版本里反而没有了。这样就会产生<strong>版本冲突</strong>，那就是<em>使用高版本的用户</em>想使用<em>低版本的功能</em>时发现无法使用。其实版本冲突的含义远不止这些，但从上面这个例子就可以看出，软件版本这个概念非常重要，直接关系到软件能否正常运行。</p>
-<p><img src="images/写给wxy的python入门教程1/版本冲突.png" /></p>
-<p>为此，Anaconda提供了一个解决方案:以项目为管理单位，每个项目使用自己要使用的软件版本，项目与项目之间相互独立，互不冲突，甚至每个项目使用的python版本也不同（python也是会有版本迭代的，只要是软件都会有，没有人能一开始就做的尽善尽美）。这样，python的使用者就可以使用不同版本的python乃至python库了（之后再介绍python库是什么）。</p>
-<h3 id="vscode的安装">VSCode的安装</h3>
-<p>VSCode是一个集成开发环境（Integrated Development
-Environment）。集成开发环境是什么？</p>
-<p>实际开发中，我们往往需要很多其他辅助软件来帮助我们写代码，例如：</p>
-<p>编辑器：用来编写代码，并且给代码着色，以方便阅读；</p>
-<p>代码提示器：输入部分代码，即可提示全部代码，加速代码的编写过程；</p>
-<p>调试器：观察程序的每一个运行步骤，发现程序的逻辑错误；</p>
-<p>项目管理工具：对程序涉及到的所有资源进行管理，包括源文件、图片、视频、第三方库等；</p>
-<p>漂亮的界面：各种按钮、面板、菜单、窗口等控件整齐排布，操作更方便。</p>
-<p>这些工具通常被打包在一起，统一发布和安装，你可以把它想象为一个word，可以让你更方便地编写代码，</p>
-<p>而VSCode就是这样一个集成开发环境，它相比于其他的集成开发环境更加轻便。</p>
+        <h1 id="感知机损失节点">感知机损失节点</h1>
+<h2 id="代码实现">代码实现</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">PerceptionLoss</span>(<span class="title class_ inherited__">LossFunction</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    感知机损失，输入为正时为0，输入为负时为输入的相反数</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">compute</span>(<span class="params">self</span>):</span><br><span class="line">        self.value = np.mat(np.where(</span><br><span class="line">            self.parents[<span class="number">0</span>].value &gt;= <span class="number">0.0</span>, <span class="number">0.0</span>, -self.parents[<span class="number">0</span>].value))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_jacobi</span>(<span class="params">self, parent</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        雅克比矩阵为对角阵，每个对角线元素对应一个父节点元素。若父节点元素大于0，则</span></span><br><span class="line"><span class="string">        相应对角线元素（偏导数）为0，否则为-1。</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        diag = np.where(parent.value &gt;= <span class="number">0.0</span>, <span class="number">0.0</span>, -<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> np.diag(diag.ravel())</span><br></pre></td></tr></table></figure>
+<p><img src="C:/Users/朱恒/AppData/Roaming/Typora/typora-user-images/image-20240118153758639.png" alt="image-20240118153758639" style="zoom:50%;" /></p>
+<center>
+感知机损失函数
+</center>
+<p>感知机损失的图形在原点处有一个硬转折，这意味着它在该点不可导。这个问题其实并不大，因为输入正好落在原点处的概率极低。但是对于大于0的输入来说，其输出值一直为0，这并不太好，虽然此时模型的分类正确，但还是希望它能够“更正确”，即输出值离
+轴越远越好。我们想要的结果是让损失值在输入大于0时仍有惩罚，但惩罚较小，而且随着输入越大惩罚越小。</p>
+<h1 id="对数损失节点">对数损失节点</h1>
+<h2 id="代码实现-1">代码实现</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LogLoss</span>(<span class="title class_ inherited__">LossFunction</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">compute</span>(<span class="params">self</span>):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">assert</span> <span class="built_in">len</span>(self.parents) == <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        x = self.parents[<span class="number">0</span>].value</span><br><span class="line"></span><br><span class="line">        self.value = np.log(<span class="number">1</span> + np.power(np.e, np.where(-x &gt; <span class="number">1e2</span>, <span class="number">1e2</span>, -x)))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_jacobi</span>(<span class="params">self, parent</span>):</span><br><span class="line"></span><br><span class="line">        x = parent.value</span><br><span class="line">        diag = -<span class="number">1</span> / (<span class="number">1</span> + np.power(np.e, np.where(x &gt; <span class="number">1e2</span>, <span class="number">1e2</span>, x)))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> np.diag(diag.ravel())</span><br></pre></td></tr></table></figure>
+<p><img src="../../public/images/损失函数汇总/对数损失函数.png" style="zoom:50%;" /></p>
+<center>
+对数损失的函数图像
+</center>
+<p><span class="math display">\[
+L(X) = log(1+e^{-x})
+\]</span></p>
+<p>当预测正确时，对数损失的值并不会像感知机损失那样立即消失，而是逐渐消失。这就对“不那么正确”的情况施加了一定的惩罚，催促其对数损失值远离
+轴，从而模型分类“更正确”。当预测错误时，对数损失有较大的惩罚且随错误加剧呈线性增长。</p>
 <hr />
 
     </div>
@@ -294,7 +275,7 @@ Environment）。集成开发环境是什么？</p>
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://morandave.github.io/2024/01/12/%E5%86%99%E7%BB%99wxy%E7%9A%84python%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B1/" title="写给wxy的python入门教程（一）——环境搭建">https://morandave.github.io/2024/01/12/写给wxy的python入门教程1/</a>
+    <a href="https://morandave.github.io/2024/01/18/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E6%B1%87%E6%80%BB/" title="损失函数汇总">https://morandave.github.io/2024/01/18/损失函数汇总/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -305,7 +286,7 @@ Environment）。集成开发环境是什么？</p>
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E7%94%A8python%E5%AE%9E%E7%8E%B0%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6/" rel="tag"># 用python实现深度学习框架</a>
           </div>
 
         
@@ -314,13 +295,10 @@ Environment）。集成开发环境是什么？</p>
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/11/30/%E8%8A%82%E7%82%B9%E7%B1%BB%E7%9A%84%E5%AE%9E%E7%8E%B0/" rel="prev" title="节点类的实现">
-      <i class="fa fa-chevron-left"></i> 节点类的实现
+    <a href="/2024/01/17/python%E8%BF%9B%E9%98%B6%E8%AF%AD%E6%B3%95-%E6%96%AD%E8%A8%80/" rel="prev" title="python进阶语法--断言">
+      <i class="fa fa-chevron-left"></i> python进阶语法--断言
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/01/13/python%E7%9A%84%E5%AF%BC%E5%85%A5%E6%9C%BA%E5%88%B6/" rel="next" title="python的导入机制">
-      python的导入机制 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -380,7 +358,7 @@ Environment）。集成开发环境是什么？</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">编程语言运行环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%9C%89%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">为什么需要有编程语言运行环境？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%93%8D%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BApython%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.</span> <span class="nav-text">实操：开始搭建python运行环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ananconda"><span class="nav-number">1.2.1.</span> <span class="nav-text">Ananconda</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vscode%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.2.</span> <span class="nav-text">VSCode的安装</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%84%9F%E7%9F%A5%E6%9C%BA%E6%8D%9F%E5%A4%B1%E8%8A%82%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">感知机损失节点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E6%95%B0%E6%8D%9F%E5%A4%B1%E8%8A%82%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">对数损失节点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">2.1.</span> <span class="nav-text">代码实现</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -583,7 +561,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'morandave.github.io',
       owner       : 'morandave',
       admin       : ['morandave'],
-      id          : 'f76c10cfd964a897ad6b6006f361f7f8',
+      id          : '378b19f93d2f4d4fbd9f9ce0683f62f2',
         language: 'zh-CN',
       distractionFreeMode: true
     });
