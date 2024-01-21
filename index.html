@@ -491,7 +491,7 @@ L(X) = log(1+e^{-x})
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-17 16:23:00" itemprop="dateModified" datetime="2024-01-17T16:23:00+08:00">2024-01-17</time>
+                <time title="修改时间：2024-01-21 14:56:43" itemprop="dateModified" datetime="2024-01-21T14:56:43+08:00">2024-01-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -519,7 +519,7 @@ L(X) = log(1+e^{-x})
 <p>学习任何编程语言的第一步（搭好编程环境后）一定是尝试输出Hello
 world，它可以验证编程环境是否搭建完成，同时也是学习一门编程语言语法开始的地方。python的Hello
 world程序如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello world!&quot;</span>)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hello world!"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>非常简洁，只有一行代码，即可实现在终端输出Hello world!</p>
 <p>这个程序实际上只有一行，使用了一个<strong>函数</strong>：print(),函数是编程中一个非常重要的概念，我们先将这个概念放一放，现阶段只需要知道print()函数的作用是将括号内的东西打印到终端。（不知道你懂不懂“打印到终端什么意思，不懂到时候记得问”）</p>
 <h1 id="变量">变量</h1>
@@ -527,7 +527,27 @@ world程序如下：</p>
 <p>到这里停一下，请聪明的你动动脑筋，可能会有哪些“基础变量”，提示一个思路：需要表示一个人需要哪些东西？人有年龄、性别、姓名、身高等等属性，要表示这些东西需要哪些东西来描述它们呢？</p>
 <h2 id="数字">数字</h2>
 <p>聪明的你应该想到了，是数字，数字是描述这个世界必不可少的工具，编程语言要想描述这个世界也需要数字。python中对于数字的处理做的非常好。你只需要像做数学题一样把计算过程写出来就可以使用数字了，举个例子：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">5</span></span><br><span class="line"><span class="built_in">print</span>(x) </span><br><span class="line"></span><br><span class="line">y = <span class="number">3.14</span></span><br><span class="line"><span class="built_in">print</span>(y)  </span><br><span class="line"></span><br><span class="line">height = <span class="number">5</span></span><br><span class="line">weight = <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(height + weight)  <span class="comment"># 加法</span></span><br><span class="line"><span class="built_in">print</span>(height - weight)  <span class="comment"># 减法</span></span><br><span class="line"><span class="built_in">print</span>(height * weight)  <span class="comment"># 乘法</span></span><br><span class="line"><span class="built_in">print</span>(height / weight)  <span class="comment"># 除法</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x = <span class="number">2</span></span><br><span class="line">y = <span class="number">3</span></span><br><span class="line"><span class="built_in">print</span>(x ** y)  <span class="comment"># 幂运算，2的3次方是8</span></span><br><span class="line"><span class="built_in">print</span>(a % b)   <span class="comment"># 取余运算，2除以3的余数为2</span></span><br><span class="line"></span><br><span class="line">BMI = weight/(height**<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(BMI)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">x <span class="token operator">=</span> <span class="token number">5</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> 
+
+y <span class="token operator">=</span> <span class="token number">3.14</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span>  
+
+height <span class="token operator">=</span> <span class="token number">5</span>
+weight <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>height <span class="token operator">+</span> weight<span class="token punctuation">)</span>  <span class="token comment"># 加法</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>height <span class="token operator">-</span> weight<span class="token punctuation">)</span>  <span class="token comment"># 减法</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>height <span class="token operator">*</span> weight<span class="token punctuation">)</span>  <span class="token comment"># 乘法</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>height <span class="token operator">/</span> weight<span class="token punctuation">)</span>  <span class="token comment"># 除法</span>
+
+
+x <span class="token operator">=</span> <span class="token number">2</span>
+y <span class="token operator">=</span> <span class="token number">3</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>x <span class="token operator">**</span> y<span class="token punctuation">)</span>  <span class="token comment"># 幂运算，2的3次方是8</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a <span class="token operator">%</span> b<span class="token punctuation">)</span>   <span class="token comment"># 取余运算，2除以3的余数为2</span>
+
+BMI <span class="token operator">=</span> weight<span class="token operator">/</span><span class="token punctuation">(</span>height<span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>BMI<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上面就是一些基本的python数字运算啦你可能会好奇，为什么要单独举个例子“y
 =
 3.14”，实际上，小数在编程语言中有个专门的概念叫<strong>浮点数</strong>，至于为什么叫浮点数，这个涉及到计算机底层的知识，如果你感兴趣的单独问我。浮点数在其他编程语言中会有明细的划分，但在python中，你只需要把它和整数当成一个概念就行，当成数字来用就ok。</p>
@@ -544,20 +564,56 @@ c分别表示三角形的三条边的长度，s表示半周长，即三角形的
 <blockquote>
 <p>提示：如何在终端输入一个数字并将这个数字赋值给某一变量呢？</p>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入a的值：&quot;</span>))</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a<span class="token operator">=</span><span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入a的值："</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>上述代码将会在终端产生“请输入一个数字：”这句话，你只需要在这句话的后面输入一个数字，再按一下回车键，就可以让a被赋值。比如，你输入6，再按回车键，这样a就被赋值6，聪明的你应该感觉到了，这样的话实际上等价于运行
 <code>a = 6</code> 这句代码。朱老师怕你还不懂，那么试试以下代码吧：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入a的值：&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a<span class="token operator">=</span><span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入a的值："</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <blockquote>
 <p>开根号运算如何实现</p>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开根号运算</span></span><br><span class="line">result = <span class="number">16</span> ** <span class="number">0.5</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(result)  <span class="comment"># 输出：4.0</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 开根号运算</span>
+result <span class="token operator">=</span> <span class="token number">16</span> <span class="token operator">**</span> <span class="token number">0.5</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>  <span class="token comment"># 输出：4.0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="字符串">字符串</h2>
 <p>那除了数字还有什么呢，是“文字”，我们需要用文字来描述这个世界。在Python中使用<strong>字符串</strong>来达到文字的作用，用引号括起的都是字符串，其中的引号可以是单引号，也可以是双引号</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;This is a string.&quot;</span></span><br><span class="line"><span class="string">&#x27;This is also a string.&#x27;</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token string">"This is a string."</span>
+<span class="token string">'This is also a string.'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h2 id="变量的命名与使用">变量的命名与使用</h2>
-<h1 id="简单数据类型">简单数据类型</h1>
+<p>在Python中，变量的命名需要遵循一定的规则，只要不违反这个规则，随你怎么命名：</p>
+<ol type="1">
+<li>变量名只能包含<em>字母</em>（大小写均可）、<em>数字</em>和<em>下划线</em>（_），不能包含空格或其他特殊字符。</li>
+<li>变量名不能以数字开头，但可以在开头包含下划线。</li>
+<li>变量名区分大小写，例如"<code>myVariable</code>"和"<code>myvariable</code>"是两个不同的变量。</li>
+<li>避免使用Python关键字和内置函数名作为变量名，这样可以避免与Python的语法冲突。例如，不要使用"<code>print</code>"等作为变量名。</li>
+</ol>
+<p>以上是一些python命名的硬规则（不能违反，违反就会出错），下面是一些增强代码可读性的建议：</p>
+<ol type="1">
+<li>变量名应该具有描述性，能够清楚地表达变量的含义。这样可以提高代码的可读性和可维护性。（不要再用简单的x、y了哦）。</li>
+<li>通常使用小写字母和下划线的组合来命名变量，例如"<code>my_variable</code>"。通过下划线将单词分开。</li>
+<li>对于常量（不会被修改的变量），通常使用全大写字母和下划线的组合来命名，例如"PI"（圆周率π）。</li>
+</ol>
+<p>需要注意的是，虽然Python对变量名的长度没有明确限制，但为了代码可读性，建议使用简洁而有意义的变量名。比如要用一个变量存储长度，可以不用<code>length</code>整个单词，用<code>len</code>三个字母也行。</p>
 <h1 id="逻辑语句">逻辑语句</h1>
+<h2 id="if语句">if语句</h2>
+<p>还记得之前写过的求<em>三角形面积</em>的小作业吗，当时朱老师留下了一个疑问：如果程序输入的三条边无法构成三角形怎么办？接下来朱老师将会告诉你处理办法，首先我们来思考一下之前的代码是怎么执行的，是一行一行执行的，如果前面一行的代码报错了，那么程序将会终止，你所写的程序运行完指的就是你写的x行代码全部运行完成。那么这就产生一个问题，为什么一定要运行所有的代码呢，我为什么不能有选择地运行我想运行的代码呢，我其实可以做一个检查，检查到三条边不能构成三角形就直接停止程序。那么接下来我们就让if语句隆重登场。我们还是用求三角形面积这个例子</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入a的值："</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入b的值："</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+c <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入c的值："</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 检查是否可以构成三角形</span>
+<span class="token keyword">if</span> a <span class="token operator">+</span> b <span class="token operator">></span> c <span class="token keyword">and</span> a <span class="token operator">+</span> c <span class="token operator">></span> b <span class="token keyword">and</span> b <span class="token operator">+</span> c <span class="token operator">></span> a<span class="token punctuation">:</span>
+    <span class="token comment"># 可以构成三角形</span>
+    s <span class="token operator">=</span> <span class="token punctuation">(</span>a <span class="token operator">+</span> b <span class="token operator">+</span> c<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">0.5</span>
+    d <span class="token operator">=</span> s <span class="token operator">*</span> <span class="token punctuation">(</span>s <span class="token operator">-</span> a<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>s <span class="token operator">-</span> b<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>s <span class="token operator">-</span> c<span class="token punctuation">)</span>
+    result <span class="token operator">=</span> d <span class="token operator">**</span> <span class="token number">0.5</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    <span class="token comment"># 不可以构成三角形</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"无法构成三角形"</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>让我们来详细讲讲以上代码：</p>
 <h1 id="函数">函数</h1>
 <hr />
 
@@ -1118,7 +1174,7 @@ x的平方前面的m就是函数的参数，x对应的是模型的输入（比�
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-18 20:55:42" itemprop="dateModified" datetime="2024-01-18T20:55:42+08:00">2024-01-18</time>
+                <time title="修改时间：2024-01-19 10:12:29" itemprop="dateModified" datetime="2024-01-19T10:12:29+08:00">2024-01-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1147,14 +1203,42 @@ x的平方前面的m就是函数的参数，x对应的是模型的输入（比�
 <p><strong>核心：</strong>把原问题分解为相对简单的子问题</p>
 <h1 id="进制相关问题">进制相关问题</h1>
 <h2 id="进制转换">进制转换</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> jinzhi;</span><br><span class="line"><span class="type">int</span> i=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(num)&#123;</span><br><span class="line">    res[i++]=num%jinzhi;</span><br><span class="line">    num/=jinzhi;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int jinzhi;
+int i&#x3D;0;
+while(num)&#123;
+    res[i++]&#x3D;num%jinzhi;
+    num&#x2F;&#x3D;jinzhi;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="十六进制的表示">十六进制的表示</h2>
 <p>数字、字母、ascll码：字母和ascll码之间的对应关系可以产生数字</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//字符减字符当数字使用</span></span><br><span class="line">nums[i]-<span class="string">&#x27;0&#x27;</span></span><br><span class="line">nums[i]-<span class="string">&#x27;A&#x27;</span>+<span class="number">10</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;字符减字符当数字使用
+nums[i]-&#39;0&#39;
+nums[i]-&#39;A&#39;+10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>卷积层本质上也是一个数据结构，也会占用内存空间，也有自己的操作</p>
-<h1 id="链表神器虚拟头节点">链表神器——虚拟头节点</h1>
+<h1 id="链表小技巧虚拟头节点">链表小技巧——虚拟头节点</h1>
 <p>用途：方便头节点的删除</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"> * <span class="keyword">struct</span> <span class="title class_">ListNode</span> &#123;</span><br><span class="line"> *     <span class="type">int</span> val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     <span class="built_in">ListNode</span>() : <span class="built_in">val</span>(<span class="number">0</span>), <span class="built_in">next</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line"> *     <span class="built_in">ListNode</span>(<span class="type">int</span> x) : <span class="built_in">val</span>(x), <span class="built_in">next</span>(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line"> *     <span class="built_in">ListNode</span>(<span class="type">int</span> x, ListNode *next) : <span class="built_in">val</span>(x), <span class="built_in">next</span>(next) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line">ListNode* dummyHead = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>); <span class="comment">// 设置一个虚拟头结点</span></span><br><span class="line">dummyHead-&gt;next = head; <span class="comment">// 将虚拟头结点指向head，这样方便后面做删除操作</span></span><br><span class="line">ListNode* cur = dummyHead;</span><br><span class="line"><span class="keyword">while</span> (cur-&gt;next != <span class="literal">NULL</span>) &#123;<span class="comment">// 遍历链表</span></span><br><span class="line">	<span class="keyword">if</span>(cur-&gt;next-&gt;val == val) &#123;</span><br><span class="line">		ListNode* tmp = cur-&gt;next;</span><br><span class="line">		cur-&gt;next = cur-&gt;next-&gt;next;</span><br><span class="line"> 		<span class="keyword">delete</span> tmp;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  		cur = cur-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">head = dummyHead-&gt;next;</span><br><span class="line"><span class="keyword">delete</span> dummyHead;</span><br><span class="line"><span class="keyword">return</span> head;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++"> * struct ListNode &#123;
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) &#123;&#125;
+ *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;
+ *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;
+ * &#125;;
+ListNode* dummyHead &#x3D; new ListNode(0); &#x2F;&#x2F; 设置一个虚拟头结点
+dummyHead-&gt;next &#x3D; head; &#x2F;&#x2F; 将虚拟头结点指向head，这样方便后面做删除操作
+ListNode* cur &#x3D; dummyHead;
+while (cur-&gt;next !&#x3D; NULL) &#123;&#x2F;&#x2F; 遍历链表
+	if(cur-&gt;next-&gt;val &#x3D;&#x3D; val) &#123;
+		ListNode* tmp &#x3D; cur-&gt;next;
+		cur-&gt;next &#x3D; cur-&gt;next-&gt;next;
+ 		delete tmp;
+	&#125; else &#123;
+  		cur &#x3D; cur-&gt;next;
+	&#125;
+&#125;
+head &#x3D; dummyHead-&gt;next;
+delete dummyHead;
+return head;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
       
     </div>
