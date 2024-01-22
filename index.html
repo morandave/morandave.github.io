@@ -178,6 +178,170 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://morandave.github.io/2024/01/22/%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="moran">
+      <meta itemprop="description" content="选择有时候比努力更重要">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="斋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/01/22/%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">激活函数整理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-01-22 17:09:38 / 修改时间：17:11:55" itemprop="dateCreated datePublished" datetime="2024-01-22T17:09:38+08:00">2024-01-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%94%A8python%E5%AE%9E%E7%8E%B0%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">用python实现深度学习框架</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1
+id="关于激活函数的一种解释很有趣">关于激活函数的一种解释（很有趣）</h1>
+<p><img src="/images/激活函数的一种解释01.png" style="zoom:50%;" /></p>
+<p><img src="/images/激活函数的一种解释02.png" style="zoom:50%;" /></p>
+<p><img src="/images/激活函数的一种解释03.png" style="zoom:50%;" /></p>
+<h1 id="logistic函数">Logistic函数</h1>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Logistic</span><span class="token punctuation">(</span>Operator<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    对向量的分量施加Logistic函数
+    """</span>
+
+    <span class="token keyword">def</span> <span class="token function">compute</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>parents<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value
+        <span class="token comment"># 对父节点的每个分量施加Logistic</span>
+        self<span class="token punctuation">.</span>value <span class="token operator">=</span> np<span class="token punctuation">.</span>mat<span class="token punctuation">(</span>
+            <span class="token number">1.0</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">1.0</span> <span class="token operator">+</span> np<span class="token punctuation">.</span>power<span class="token punctuation">(</span>np<span class="token punctuation">.</span>e<span class="token punctuation">,</span> np<span class="token punctuation">.</span>where<span class="token punctuation">(</span><span class="token operator">-</span>x <span class="token operator">></span> <span class="token number">1e2</span><span class="token punctuation">,</span> <span class="token number">1e2</span><span class="token punctuation">,</span> <span class="token operator">-</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">get_jacobi</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> parent<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> np<span class="token punctuation">.</span>diag<span class="token punctuation">(</span>np<span class="token punctuation">.</span>mat<span class="token punctuation">(</span>np<span class="token punctuation">.</span>multiply<span class="token punctuation">(</span>self<span class="token punctuation">.</span>value<span class="token punctuation">,</span> <span class="token number">1</span> <span class="token operator">-</span> self<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>A1<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/images/Logistic函数.png" style="zoom:50%;" /> <span
+class="math display">\[
+p_1  =\frac{1} { {1 + e^{-x} } }
+\]</span></p>
+<p><span class="math display">\[
+p_2 = \frac{1} { {1 + e^{x} } }
+\]</span></p>
+<p>p1位于0和1之间，
+p2也位于0和1之间，它们的和为1。正如刚才所说，训练会增大正类样本的p1
+与负类样本的p2
+，这启发我们可以把p1当作正类的概率，把p2当作负类的概率，即把p1和p2当作二分类的概率分布。</p>
+<h1 id="双曲正切函数tanh">双曲正切函数（Tanh）</h1>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Tanh</span><span class="token punctuation">(</span>Operator<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    对矩阵的元素施加Tanh函数
+    """</span>
+
+    <span class="token keyword">def</span> <span class="token function">compute</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>value <span class="token operator">=</span> np<span class="token punctuation">.</span>mat<span class="token punctuation">(</span><span class="token punctuation">(</span>np<span class="token punctuation">.</span>power<span class="token punctuation">(</span>np<span class="token punctuation">.</span>e<span class="token punctuation">,</span> np<span class="token punctuation">.</span>where<span class="token punctuation">(</span><span class="token operator">-</span>x <span class="token operator">></span> <span class="token number">1e2</span><span class="token punctuation">,</span> <span class="token number">1e2</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">-</span>np<span class="token punctuation">.</span>power<span class="token punctuation">(</span>np<span class="token punctuation">.</span>e<span class="token punctuation">,</span> np<span class="token punctuation">.</span>where<span class="token punctuation">(</span><span class="token operator">-</span>x <span class="token operator">></span> <span class="token number">1e2</span><span class="token punctuation">,</span> <span class="token number">1e2</span><span class="token punctuation">,</span> <span class="token operator">-</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">get_jacobi</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> parent<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> np<span class="token punctuation">.</span>diag<span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">-</span>self<span class="token punctuation">.</span>compute<span class="token punctuation">(</span>self<span class="token punctuation">.</span>parents<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/images/Tanh函数.png" style="zoom:50%;" /> <span
+class="math display">\[
+\text{tanh}(x) = \frac{ {e^x - e^{-x} } } { {e^x + e^{-x} } }
+\]</span>
+双曲正切函数和Logistic函数的图形相似，也是一个呈S形的曲线，不同的是它在负值一侧趋近于
+-1，而Logistic函数在负值一侧则趋近于0。 <span class="math display">\[
+\frac{ {d} } { {dx} }\left(\text{tanh}(x)\right) = 1 - \text{tanh}^2(x)
+\]</span></p>
+<h2
+id="线性整流单元relurectified-linear-unit">线性整流单元ReLU（Rectified
+Linear Unit）</h2>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">ReLU</span><span class="token punctuation">(</span>Operator<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    对矩阵的元素施加ReLU函数
+    """</span>
+
+    <span class="token keyword">def</span> <span class="token function">compute</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>value <span class="token operator">=</span> np<span class="token punctuation">.</span>mat<span class="token punctuation">(</span>np<span class="token punctuation">.</span>where<span class="token punctuation">(</span>
+            self<span class="token punctuation">.</span>parents<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value <span class="token operator">></span> <span class="token number">0.0</span><span class="token punctuation">,</span>
+            self<span class="token punctuation">.</span>parents<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value<span class="token punctuation">,</span>
+            <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">get_jacobi</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> parent<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> np<span class="token punctuation">.</span>diag<span class="token punctuation">(</span>np<span class="token punctuation">.</span>where<span class="token punctuation">(</span>self<span class="token punctuation">.</span>parents<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value<span class="token punctuation">.</span>A1 <span class="token operator">></span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/images/ReLU函数.png" style="zoom:50%;" /> <span
+class="math display">\[
+\text{ReLU}(x) = \max(0, x)
+\]</span>
+当输入大于0时，ReLU函数的导数是1，即图形在正半轴的斜率是1；当输入小于0时，ReLU函数的导数是0，即图形在负半轴的斜率是0。我们都知道，计算图节点的关键任务是计算子节点对父节点的雅可比矩阵。因此，我们并不希望看到导数为0的情况，因为这样意味着在反向传播时就没有信息向前传递了。对此，人们提出了一种对ReLU函数的修改，称为LeakyReLU：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">ReLU</span><span class="token punctuation">(</span>Operator<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""
+    对矩阵的元素施加ReLU函数
+    """</span>
+
+    nslope <span class="token operator">=</span> <span class="token number">0.1</span>  <span class="token comment"># 负半轴的斜率</span>
+
+    <span class="token keyword">def</span> <span class="token function">compute</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>value <span class="token operator">=</span> np<span class="token punctuation">.</span>mat<span class="token punctuation">(</span>np<span class="token punctuation">.</span>where<span class="token punctuation">(</span>
+            self<span class="token punctuation">.</span>parents<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value <span class="token operator">></span> <span class="token number">0.0</span><span class="token punctuation">,</span>
+            self<span class="token punctuation">.</span>parents<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value<span class="token punctuation">,</span>
+            self<span class="token punctuation">.</span>nslope <span class="token operator">*</span> self<span class="token punctuation">.</span>parents<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">get_jacobi</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> parent<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> np<span class="token punctuation">.</span>diag<span class="token punctuation">(</span>np<span class="token punctuation">.</span>where<span class="token punctuation">(</span>self<span class="token punctuation">.</span>parents<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value<span class="token punctuation">.</span>A1 <span class="token operator">></span> <span class="token number">0.0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>nslope<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/images/LeakyReLU.png" style="zoom:50%;" /> <span
+class="math display">\[
+\text{LeakyReLU}(x) = \begin{cases}
+x, &amp; \text{if } x \geq 0 \\
+\alpha x, &amp; \text{if } x &lt; 0 \\
+\end{cases}
+\]</span>
+以上是LeakyReLU函数的实现，LeakyReLU函数与ReLU函数的差异是：当输入小于0时，它的输出为输
+入的0.1倍。其中的0.1是一个超参数，也可以取其他值。如此，在负半轴，LeakyReLU函数的斜率就是0.1了，这个值虽然很小但是不为0。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://morandave.github.io/2024/01/18/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E6%B1%87%E6%80%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1155,123 +1319,11 @@ x的平方前面的m就是函数的参数，x对应的是模型的输入（比�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://morandave.github.io/2023/06/11/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.png">
-      <meta itemprop="name" content="moran">
-      <meta itemprop="description" content="选择有时候比努力更重要">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="斋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/11/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" class="post-title-link" itemprop="url">算法学习笔记（一）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-11 10:07:52" itemprop="dateCreated datePublished" datetime="2023-06-11T10:07:52+08:00">2023-06-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-19 10:12:29" itemprop="dateModified" datetime="2024-01-19T10:12:29+08:00">2024-01-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="思想">思想</h1>
-<p>数据结构要从内存空间和对内存空间的操作两方面来思考。内存空间：任何的数据结构都要用来存储数据，只不过用的方式不同，有的直接按顺序利用内存空间，比如数组；有的则是会用指针来方便对内存的操作，例如链表为了方便插入和删除采用指针。对内存空间的操作：对内存空间的操作主要是由函数来实现，不同的数据结构会有不同的函数来对内存空间进行特定的操作。</p>
-<h1 id="动态规划">动态规划</h1>
-<p><strong>核心：</strong>把原问题分解为相对简单的子问题</p>
-<h1 id="进制相关问题">进制相关问题</h1>
-<h2 id="进制转换">进制转换</h2>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int jinzhi;
-int i&#x3D;0;
-while(num)&#123;
-    res[i++]&#x3D;num%jinzhi;
-    num&#x2F;&#x3D;jinzhi;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="十六进制的表示">十六进制的表示</h2>
-<p>数字、字母、ascll码：字母和ascll码之间的对应关系可以产生数字</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;字符减字符当数字使用
-nums[i]-&#39;0&#39;
-nums[i]-&#39;A&#39;+10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>卷积层本质上也是一个数据结构，也会占用内存空间，也有自己的操作</p>
-<h1 id="链表小技巧虚拟头节点">链表小技巧——虚拟头节点</h1>
-<p>用途：方便头节点的删除</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++"> * struct ListNode &#123;
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) &#123;&#125;
- *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;
- *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;
- * &#125;;
-ListNode* dummyHead &#x3D; new ListNode(0); &#x2F;&#x2F; 设置一个虚拟头结点
-dummyHead-&gt;next &#x3D; head; &#x2F;&#x2F; 将虚拟头结点指向head，这样方便后面做删除操作
-ListNode* cur &#x3D; dummyHead;
-while (cur-&gt;next !&#x3D; NULL) &#123;&#x2F;&#x2F; 遍历链表
-	if(cur-&gt;next-&gt;val &#x3D;&#x3D; val) &#123;
-		ListNode* tmp &#x3D; cur-&gt;next;
-		cur-&gt;next &#x3D; cur-&gt;next-&gt;next;
- 		delete tmp;
-	&#125; else &#123;
-  		cur &#x3D; cur-&gt;next;
-	&#125;
-&#125;
-head &#x3D; dummyHead-&gt;next;
-delete dummyHead;
-return head;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 
 
@@ -1338,14 +1390,14 @@ return head;<span aria-hidden="true" class="line-numbers-rows"><span></span><spa
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
