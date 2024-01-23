@@ -203,7 +203,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-01-22 17:09:38 / 修改时间：17:30:17" itemprop="dateCreated datePublished" datetime="2024-01-22T17:09:38+08:00">2024-01-22</time>
+              <time title="创建时间：2024-01-22 17:09:38 / 修改时间：17:32:14" itemprop="dateCreated datePublished" datetime="2024-01-22T17:09:38+08:00">2024-01-22</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -323,6 +323,7 @@ x, &amp; \text{if } x \geq 0 \\
 \]</span>
 以上是LeakyReLU函数的实现，LeakyReLU函数与ReLU函数的差异是：当输入小于0时，它的输出为输
 入的0.1倍。其中的0.1是一个超参数，也可以取其他值。如此，在负半轴，LeakyReLU函数的斜率就是0.1了，这个值虽然很小但是不为0。</p>
+<hr />
 
       
     </div>
@@ -655,7 +656,7 @@ L(X) = log(1+e^{-x})
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-21 21:55:31" itemprop="dateModified" datetime="2024-01-21T21:55:31+08:00">2024-01-21</time>
+                <time title="修改时间：2024-01-23 09:59:28" itemprop="dateModified" datetime="2024-01-23T09:59:28+08:00">2024-01-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -794,6 +795,26 @@ c <span class="token operator">=</span> <span class="token builtin">float</span>
 <p>2.输入的边中有负数：<code>a&lt;=0 or b&lt;=0 or c&lt;=0</code>（请注意小于/大于等于需用&lt;=/&gt;=，没有单独的一个符号表示小于/大于等于）</p>
 <p>与<code>and</code>不同，<code>or</code>没有那么苛刻，只要用<code>or</code>连接的子条件中的<strong>任意一个</strong>被满足了，那么这整个大条件都被满足了，在这个例子中，只要这三条边中的任意一个小于等于0了，<code>elif</code>就会被触发</p>
 <p>聪明的你会注意到，上面的代码我中有一些行被我“往后面”移动了，这个“移动”呢叫做：<strong>缩进</strong>。缩进也是python语法的一部分，<strong>如何体现某几行代码属于某个<code>if</code>语句</strong>呢，那就是看它后面那几行代码缩进了，这个缩进的长度是固定的：四个空格，也就是一个Tab键（键盘的左上方附近）。</p>
+<h3 id="if语句练习题">if语句练习题</h3>
+<p><strong>题目：成绩等级判断</strong></p>
+<p>问题描述：
+编写一个程序，根据输入的成绩判断学生的等级。成绩的等级划分如下：</p>
+<ul>
+<li>90分及以上为优秀（Excellent）</li>
+<li>80分及以上为良好（Good）</li>
+<li>70分及以上为中等（Average）</li>
+<li>60分及以上为及格（Pass）</li>
+<li>60分以下为不及格（Fail）</li>
+</ul>
+<p>要求用户输入一个整数表示学生的成绩，并根据成绩输出相应的等级</p>
+<p>示例输出：</p>
+<p>请输入学生的成绩: 75 成绩等级: Average</p>
+<p>解题思路：</p>
+<ol type="1">
+<li>使用<code>input()</code>函数获取用户输入的成绩，并将其转换为整数类型。</li>
+<li>使用嵌套的<code>if</code>语句判断成绩的等级，并根据不同的条件输出相应的等级。</li>
+</ol>
+<h1 id="循环语句">循环语句</h1>
 <h1 id="函数">函数</h1>
 <hr />
 
