@@ -201,17 +201,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-01-22 17:09:38 / 修改时间：17:32:14" itemprop="dateCreated datePublished" datetime="2024-01-22T17:09:38+08:00">2024-01-22</time>
+              <time title="创建时间：2024-01-22 17:09:38" itemprop="dateCreated datePublished" datetime="2024-01-22T17:09:38+08:00">2024-01-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-23 10:06:07" itemprop="dateModified" datetime="2024-01-23T10:06:07+08:00">2024-01-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%94%A8python%E5%AE%9E%E7%8E%B0%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">用python实现深度学习框架</span></a>
+                  <a href="/categories/deep-learning-framework/" itemprop="url" rel="index"><span itemprop="name">deep learning framework</span></a>
                 </span>
             </span>
 
@@ -1197,7 +1203,7 @@ Environment）。集成开发环境是什么？</p>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-18 18:14:50" itemprop="dateModified" datetime="2024-01-18T18:14:50+08:00">2024-01-18</time>
+                <time title="修改时间：2024-01-23 10:05:50" itemprop="dateModified" datetime="2024-01-23T10:05:50+08:00">2024-01-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1234,7 +1240,19 @@ Environment）。集成开发环境是什么？</p>
 <p><code>backward</code>
 ：反向传播，计算结果节点对本节点的雅可比矩阵</p>
 <h2 id="反向传播的实现">反向传播的实现</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">backward</span>(<span class="params">self, result</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    计算结果节点对本节点的雅可比矩阵</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> self.jacobi <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">		<span class="keyword">if</span> self <span class="keyword">is</span> result:</span><br><span class="line">           self.jacobi = np.mat(np.eye(self.dimension()))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.jacobi = np.zeros((result.dimension(),self.dimension()))</span><br><span class="line">            <span class="keyword">for</span> child <span class="keyword">in</span> self.get_children():</span><br><span class="line">                <span class="keyword">if</span> child.value <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                    self.jacobi += child.backward(result) * child.get_jacobi(self)</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">backward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> result<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''
+    计算结果节点对本节点的雅可比矩阵
+    '''</span>
+    <span class="token keyword">if</span> self<span class="token punctuation">.</span>jacobi <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+		<span class="token keyword">if</span> self <span class="token keyword">is</span> result<span class="token punctuation">:</span>
+           self<span class="token punctuation">.</span>jacobi <span class="token operator">=</span> np<span class="token punctuation">.</span>mat<span class="token punctuation">(</span>np<span class="token punctuation">.</span>eye<span class="token punctuation">(</span>self<span class="token punctuation">.</span>dimension<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>jacobi <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>dimension<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>self<span class="token punctuation">.</span>dimension<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">for</span> child <span class="token keyword">in</span> self<span class="token punctuation">.</span>get_children<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> child<span class="token punctuation">.</span>value <span class="token keyword">is</span> <span class="token keyword">not</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+                    self<span class="token punctuation">.</span>jacobi <span class="token operator">+=</span> child<span class="token punctuation">.</span>backward<span class="token punctuation">(</span>result<span class="token punctuation">)</span> <span class="token operator">*</span> child<span class="token punctuation">.</span>get_jacobi<span class="token punctuation">(</span>self<span class="token punctuation">)</span>
+        <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr />
 
       
@@ -1419,13 +1437,13 @@ x的平方前面的m就是函数的参数，x对应的是模型的输入（比�
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
