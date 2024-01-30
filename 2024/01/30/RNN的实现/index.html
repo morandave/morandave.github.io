@@ -21,20 +21,22 @@
     var CONFIG = {"hostname":"morandave.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="思想 数据结构要从内存空间和对内存空间的操作两方面来思考。内存空间：任何的数据结构都要用来存储数据，只不过用的方式不同，有的直接按顺序利用内存空间，比如数组；有的则是会用指针来方便对内存的操作，例如链表为了方便插入和删除采用指针。对内存空间的操作：对内存空间的操作主要是由函数来实现，不同的数据结构会有不同的函数来对内存空间进行特定的操作。 动态规划 核心：把原问题分解为相对简单的子问题 进">
+  <meta name="description" content="为什么要用循环神经网络？ 以前的模型都具有一种对称性：与特征的位置无关。变换特征的位置，无非是以不同位置上的参数为权值，于模型的训练和预测无碍。当然，训练和预测时，样本的特征也须保持同样的顺序。这种对称性令模型可以不用在乎特征的相对位置，于是模型也就必然地忽略了相对位置中所蕴含的信息。RNN就是针对这个问题而提出的。  inputs &#x3D; [ms.core.Variable(dim&#x3D;(dime">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法学习笔记（一）">
-<meta property="og:url" content="https://morandave.github.io/2023/06/11/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:title" content="RNN">
+<meta property="og:url" content="https://morandave.github.io/2024/01/30/RNN%E7%9A%84%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="斋">
-<meta property="og:description" content="思想 数据结构要从内存空间和对内存空间的操作两方面来思考。内存空间：任何的数据结构都要用来存储数据，只不过用的方式不同，有的直接按顺序利用内存空间，比如数组；有的则是会用指针来方便对内存的操作，例如链表为了方便插入和删除采用指针。对内存空间的操作：对内存空间的操作主要是由函数来实现，不同的数据结构会有不同的函数来对内存空间进行特定的操作。 动态规划 核心：把原问题分解为相对简单的子问题 进">
+<meta property="og:description" content="为什么要用循环神经网络？ 以前的模型都具有一种对称性：与特征的位置无关。变换特征的位置，无非是以不同位置上的参数为权值，于模型的训练和预测无碍。当然，训练和预测时，样本的特征也须保持同样的顺序。这种对称性令模型可以不用在乎特征的相对位置，于是模型也就必然地忽略了相对位置中所蕴含的信息。RNN就是针对这个问题而提出的。  inputs &#x3D; [ms.core.Variable(dim&#x3D;(dime">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-11T02:07:52.000Z">
-<meta property="article:modified_time" content="2024-01-19T02:12:29.946Z">
+<meta property="og:image" content="https://morandave.github.io/images/RNN.drawio.png">
+<meta property="article:published_time" content="2024-01-30T08:01:11.000Z">
+<meta property="article:modified_time" content="2024-01-30T08:01:11.227Z">
 <meta property="article:author" content="moran">
-<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="用python实现深度学习框架">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://morandave.github.io/images/RNN.drawio.png">
 
-<link rel="canonical" href="https://morandave.github.io/2023/06/11/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">
+<link rel="canonical" href="https://morandave.github.io/2024/01/30/RNN%E7%9A%84%E5%AE%9E%E7%8E%B0/">
 
 
 <script id="page-configurations">
@@ -47,7 +49,7 @@
   };
 </script>
 
-  <title>算法学习笔记（一） | 斋</title>
+  <title>RNN | 斋</title>
   
 
 
@@ -182,7 +184,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://morandave.github.io/2023/06/11/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="https://morandave.github.io/2024/01/30/RNN%E7%9A%84%E5%AE%9E%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.png">
@@ -195,7 +197,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          算法学习笔记（一）
+          RNN
         </h1>
 
         <div class="post-meta">
@@ -205,22 +207,15 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-06-11 10:07:52" itemprop="dateCreated datePublished" datetime="2023-06-11T10:07:52+08:00">2023-06-11</time>
+              <time title="创建时间：2024-01-30 16:01:11" itemprop="dateCreated datePublished" datetime="2024-01-30T16:01:11+08:00">2024-01-30</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-01-19 10:12:29" itemprop="dateModified" datetime="2024-01-19T10:12:29+08:00">2024-01-19</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index"><span itemprop="name">algorithm</span></a>
+                  <a href="/categories/deep-learning-framework/" itemprop="url" rel="index"><span itemprop="name">deep learning framework</span></a>
                 </span>
             </span>
 
@@ -242,48 +237,40 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="思想">思想</h1>
-<p>数据结构要从内存空间和对内存空间的操作两方面来思考。内存空间：任何的数据结构都要用来存储数据，只不过用的方式不同，有的直接按顺序利用内存空间，比如数组；有的则是会用指针来方便对内存的操作，例如链表为了方便插入和删除采用指针。对内存空间的操作：对内存空间的操作主要是由函数来实现，不同的数据结构会有不同的函数来对内存空间进行特定的操作。</p>
-<h1 id="动态规划">动态规划</h1>
-<p><strong>核心：</strong>把原问题分解为相对简单的子问题</p>
-<h1 id="进制相关问题">进制相关问题</h1>
-<h2 id="进制转换">进制转换</h2>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int jinzhi;
-int i&#x3D;0;
-while(num)&#123;
-    res[i++]&#x3D;num%jinzhi;
-    num&#x2F;&#x3D;jinzhi;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="十六进制的表示">十六进制的表示</h2>
-<p>数字、字母、ascll码：字母和ascll码之间的对应关系可以产生数字</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">&#x2F;&#x2F;字符减字符当数字使用
-nums[i]-&#39;0&#39;
-nums[i]-&#39;A&#39;+10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>卷积层本质上也是一个数据结构，也会占用内存空间，也有自己的操作</p>
-<h1 id="链表小技巧虚拟头节点">链表小技巧——虚拟头节点</h1>
-<p>用途：方便头节点的删除</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++"> * struct ListNode &#123;
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) &#123;&#125;
- *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;
- *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;
- * &#125;;
-ListNode* dummyHead &#x3D; new ListNode(0); &#x2F;&#x2F; 设置一个虚拟头结点
-dummyHead-&gt;next &#x3D; head; &#x2F;&#x2F; 将虚拟头结点指向head，这样方便后面做删除操作
-ListNode* cur &#x3D; dummyHead;
-while (cur-&gt;next !&#x3D; NULL) &#123;&#x2F;&#x2F; 遍历链表
-	if(cur-&gt;next-&gt;val &#x3D;&#x3D; val) &#123;
-		ListNode* tmp &#x3D; cur-&gt;next;
-		cur-&gt;next &#x3D; cur-&gt;next-&gt;next;
- 		delete tmp;
-	&#125; else &#123;
-  		cur &#x3D; cur-&gt;next;
-	&#125;
-&#125;
-head &#x3D; dummyHead-&gt;next;
-delete dummyHead;
-return head;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <h1 id="为什么要用循环神经网络">为什么要用循环神经网络？</h1>
+<p>以前的模型都具有一种对称性：与特征的位置无关。变换特征的位置，无非是以不同位置上的参数为权值，于模型的训练和预测无碍。当然，训练和预测时，样本的特征也须保持同样的顺序。这种对称性令模型可以不用在乎特征的相对位置，于是模型也就必然地忽略了<strong>相对位置中所蕴含的信息</strong>。RNN就是针对这个问题而提出的。</p>
+<p><img src="/images/RNN.drawio.png" /></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">inputs <span class="token operator">=</span> <span class="token punctuation">[</span>ms<span class="token punctuation">.</span>core<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token punctuation">(</span>dimension<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> init<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> trainable<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>seq_len<span class="token punctuation">)</span><span class="token punctuation">]</span>
+ 
+<span class="token comment"># 输入权值矩阵</span>
+U <span class="token operator">=</span> ms<span class="token punctuation">.</span>core<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token punctuation">(</span>status_dimension<span class="token punctuation">,</span> dimension<span class="token punctuation">)</span><span class="token punctuation">,</span> init<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> trainable<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 状态权值矩阵</span>
+W <span class="token operator">=</span> ms<span class="token punctuation">.</span>core<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token punctuation">(</span>status_dimension<span class="token punctuation">,</span> status_dimension<span class="token punctuation">)</span><span class="token punctuation">,</span> init<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> trainable<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 偏置向量</span>
+b <span class="token operator">=</span> ms<span class="token punctuation">.</span>core<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token punctuation">(</span>status_dimension<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> init<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> trainable<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+
+<span class="token comment"># 计算图搭建：</span>
+last_step <span class="token operator">=</span> <span class="token boolean">None</span>  <span class="token comment"># 上一步的输出，第一步没有上一步，先将其置为 None</span>
+<span class="token keyword">for</span> iv <span class="token keyword">in</span> inputs<span class="token punctuation">:</span>
+    h <span class="token operator">=</span> ms<span class="token punctuation">.</span>ops<span class="token punctuation">.</span>Add<span class="token punctuation">(</span>ms<span class="token punctuation">.</span>ops<span class="token punctuation">.</span>MatMul<span class="token punctuation">(</span>U<span class="token punctuation">,</span> iv<span class="token punctuation">)</span><span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> last_step <span class="token keyword">is</span> <span class="token keyword">not</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+        h <span class="token operator">=</span> ms<span class="token punctuation">.</span>ops<span class="token punctuation">.</span>Add<span class="token punctuation">(</span>ms<span class="token punctuation">.</span>ops<span class="token punctuation">.</span>MatMul<span class="token punctuation">(</span>W<span class="token punctuation">,</span> last_step<span class="token punctuation">)</span><span class="token punctuation">,</span> h<span class="token punctuation">)</span>
+
+    h <span class="token operator">=</span> ms<span class="token punctuation">.</span>ops<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span>h<span class="token punctuation">)</span>
+
+    last_step <span class="token operator">=</span> h
+
+
+fc1 <span class="token operator">=</span> ms<span class="token punctuation">.</span>layer<span class="token punctuation">.</span>fc<span class="token punctuation">(</span>last_step<span class="token punctuation">,</span> status_dimension<span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">,</span> <span class="token string">"ReLU"</span><span class="token punctuation">)</span>  <span class="token comment"># 第一全连接层</span>
+fc2 <span class="token operator">=</span> ms<span class="token punctuation">.</span>layer<span class="token punctuation">.</span>fc<span class="token punctuation">(</span>fc1<span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">"ReLU"</span><span class="token punctuation">)</span>  <span class="token comment"># 第二全连接层</span>
+output <span class="token operator">=</span> ms<span class="token punctuation">.</span>layer<span class="token punctuation">.</span>fc<span class="token punctuation">(</span>fc2<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">"None"</span><span class="token punctuation">)</span>  <span class="token comment"># 输出层</span>
+
+<span class="token comment"># 概率</span>
+predict <span class="token operator">=</span> ms<span class="token punctuation">.</span>ops<span class="token punctuation">.</span>SoftMax<span class="token punctuation">(</span>output<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     </div>
 
@@ -299,7 +286,7 @@ return head;<span aria-hidden="true" class="line-numbers-rows"><span></span><spa
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://morandave.github.io/2023/06/11/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/" title="算法学习笔记（一）">https://morandave.github.io/2023/06/11/算法学习笔记（一）/</a>
+    <a href="https://morandave.github.io/2024/01/30/RNN%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="RNN">https://morandave.github.io/2024/01/30/RNN的实现/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -310,7 +297,7 @@ return head;<span aria-hidden="true" class="line-numbers-rows"><span></span><spa
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+              <a href="/tags/%E7%94%A8python%E5%AE%9E%E7%8E%B0%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6/" rel="tag"># 用python实现深度学习框架</a>
           </div>
 
         
@@ -318,11 +305,11 @@ return head;<span aria-hidden="true" class="line-numbers-rows"><span></span><spa
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2023/07/28/%E5%AD%A6%E6%A0%A1%E5%A4%8F%E4%BB%A4%E8%90%A5%E6%80%BB%E7%BB%93/" rel="next" title="学校夏令营总结">
-      学校夏令营总结 <i class="fa fa-chevron-right"></i>
+    <a href="/2024/01/22/%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E6%95%B4%E7%90%86/" rel="prev" title="激活函数整理">
+      <i class="fa fa-chevron-left"></i> 激活函数整理
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -382,7 +369,7 @@ return head;<span aria-hidden="true" class="line-numbers-rows"><span></span><spa
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E6%83%B3"><span class="nav-number">1.</span> <span class="nav-text">思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-number">2.</span> <span class="nav-text">动态规划</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E5%88%B6%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">进制相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2"><span class="nav-number">3.1.</span> <span class="nav-text">进制转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">3.2.</span> <span class="nav-text">十六进制的表示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E5%B0%8F%E6%8A%80%E5%B7%A7%E8%99%9A%E6%8B%9F%E5%A4%B4%E8%8A%82%E7%82%B9"><span class="nav-number">4.</span> <span class="nav-text">链表小技巧——虚拟头节点</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">1.</span> <span class="nav-text">为什么要用循环神经网络？</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -585,7 +572,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'morandave.github.io',
       owner       : 'morandave',
       admin       : ['morandave'],
-      id          : 'c6b7a354dd14b999d165b6b56ef20551',
+      id          : '262656882daf6401efc8bacb96197d8e',
         language: 'zh-CN',
       distractionFreeMode: true
     });
