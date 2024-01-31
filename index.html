@@ -204,6 +204,13 @@
 
               <time title="创建时间：2024-01-30 16:01:11" itemprop="dateCreated datePublished" datetime="2024-01-30T16:01:11+08:00">2024-01-30</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-31 16:23:26" itemprop="dateModified" datetime="2024-01-31T16:23:26+08:00">2024-01-31</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -259,6 +266,113 @@ output <span class="token operator">=</span> ms<span class="token punctuation">.
 
 <span class="token comment"># 概率</span>
 predict <span class="token operator">=</span> ms<span class="token punctuation">.</span>ops<span class="token punctuation">.</span>SoftMax<span class="token punctuation">(</span>output<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="变长序列">变长序列</h1>
+<h2 id="welding焊接的意思">Welding（焊接的意思）</h2>
+<p>核心是<strong>焊接点</strong>这个概念</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Welding</span><span class="token punctuation">(</span>Operator<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">compute</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">assert</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>parents<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span> <span class="token keyword">and</span> self<span class="token punctuation">.</span>parents<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token keyword">is</span> <span class="token keyword">not</span> <span class="token boolean">None</span>
+        self<span class="token punctuation">.</span>value <span class="token operator">=</span> self<span class="token punctuation">.</span>parents<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>value
+
+    <span class="token keyword">def</span> <span class="token function">get_jacobi</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> parent<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">assert</span> parent <span class="token keyword">is</span> self<span class="token punctuation">.</span>parents<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        <span class="token keyword">return</span> np<span class="token punctuation">.</span>mat<span class="token punctuation">(</span>np<span class="token punctuation">.</span>eye<span class="token punctuation">(</span>self<span class="token punctuation">.</span>dimension<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">weld</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> node<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">"""
+        将本节点焊接到输入节点上
+        """</span>
+
+        <span class="token comment"># 首先与之前的父节点断开</span>
+
+        <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>parents<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span> <span class="token keyword">and</span> self<span class="token punctuation">.</span>parents<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token keyword">is</span> <span class="token keyword">not</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>parents<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>children<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>self<span class="token punctuation">)</span>
+
+        self<span class="token punctuation">.</span>parents<span class="token punctuation">.</span>clear<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># 与输入节点焊接</span>
+        self<span class="token punctuation">.</span>parents<span class="token punctuation">.</span>append<span class="token punctuation">(</span>node<span class="token punctuation">)</span>
+        node<span class="token punctuation">.</span>children<span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>不执行任何计算，但支持将自己连接在任意节点之后，<code>weld</code>函数实现了一个功能，它可以随时抛弃原有的父节点，转而连接另一个节点作为父节点。而子节点是不变的全连接层</p>
+<h2 id="网络搭建">网络搭建</h2>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 输入向量节点</span>
+inputs <span class="token operator">=</span> <span class="token punctuation">[</span>ms<span class="token punctuation">.</span>core<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token punctuation">(</span>dimension<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> init<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> trainable<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>seq_len<span class="token punctuation">)</span><span class="token punctuation">]</span>
+ 
+<span class="token comment"># 输入权值矩阵</span>
+U <span class="token operator">=</span> ms<span class="token punctuation">.</span>core<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token punctuation">(</span>status_dimension<span class="token punctuation">,</span> dimension<span class="token punctuation">)</span><span class="token punctuation">,</span> init<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> trainable<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 状态权值矩阵</span>
+W <span class="token operator">=</span> ms<span class="token punctuation">.</span>core<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token punctuation">(</span>status_dimension<span class="token punctuation">,</span> status_dimension<span class="token punctuation">)</span><span class="token punctuation">,</span> init<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> trainable<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 偏置向量</span>
+b <span class="token operator">=</span> ms<span class="token punctuation">.</span>core<span class="token punctuation">.</span>Variable<span class="token punctuation">(</span>dim<span class="token operator">=</span><span class="token punctuation">(</span>status_dimension<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> init<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> trainable<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 保存各个时刻内部状态变量的数组</span>
+hiddens <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+last_step <span class="token operator">=</span> <span class="token boolean">None</span>
+<span class="token keyword">for</span> iv <span class="token keyword">in</span> inputs<span class="token punctuation">:</span>
+    h <span class="token operator">=</span> ms<span class="token punctuation">.</span>ops<span class="token punctuation">.</span>Add<span class="token punctuation">(</span>ms<span class="token punctuation">.</span>ops<span class="token punctuation">.</span>MatMul<span class="token punctuation">(</span>U<span class="token punctuation">,</span> iv<span class="token punctuation">)</span><span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> last_step <span class="token keyword">is</span> <span class="token keyword">not</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+        h <span class="token operator">=</span> ms<span class="token punctuation">.</span>ops<span class="token punctuation">.</span>Add<span class="token punctuation">(</span>ms<span class="token punctuation">.</span>ops<span class="token punctuation">.</span>MatMul<span class="token punctuation">(</span>W<span class="token punctuation">,</span> last_step<span class="token punctuation">)</span><span class="token punctuation">,</span> h<span class="token punctuation">)</span>
+
+    h <span class="token operator">=</span> ms<span class="token punctuation">.</span>ops<span class="token punctuation">.</span>ReLU<span class="token punctuation">(</span>h<span class="token punctuation">)</span>
+
+    last_step <span class="token operator">=</span> h
+    hiddens<span class="token punctuation">.</span>append<span class="token punctuation">(</span>last_step<span class="token punctuation">)</span>
+
+
+<span class="token comment"># 焊接点，暂时不连接父节点</span>
+welding_point <span class="token operator">=</span> ms<span class="token punctuation">.</span>ops<span class="token punctuation">.</span>Welding<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+<span class="token comment"># 全连接网络</span>
+fc1 <span class="token operator">=</span> ms<span class="token punctuation">.</span>layer<span class="token punctuation">.</span>fc<span class="token punctuation">(</span>welding_point<span class="token punctuation">,</span> status_dimension<span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">,</span> <span class="token string">"ReLU"</span><span class="token punctuation">)</span>
+fc2 <span class="token operator">=</span> ms<span class="token punctuation">.</span>layer<span class="token punctuation">.</span>fc<span class="token punctuation">(</span>fc1<span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">"ReLU"</span><span class="token punctuation">)</span>
+output <span class="token operator">=</span> ms<span class="token punctuation">.</span>layer<span class="token punctuation">.</span>fc<span class="token punctuation">(</span>fc2<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">"None"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 概率</span>
+predict <span class="token operator">=</span> ms<span class="token punctuation">.</span>ops<span class="token punctuation">.</span>SoftMax<span class="token punctuation">(</span>output<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="训练流程">训练流程</h2>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">learning_rate <span class="token operator">=</span> <span class="token number">0.005</span>
+optimizer <span class="token operator">=</span> ms<span class="token punctuation">.</span>optimizer<span class="token punctuation">.</span>Adam<span class="token punctuation">(</span>ms<span class="token punctuation">.</span>default_graph<span class="token punctuation">,</span> loss<span class="token punctuation">,</span> learning_rate<span class="token punctuation">)</span>
+
+batch_size <span class="token operator">=</span> <span class="token number">16</span>
+
+<span class="token keyword">for</span> epoch <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    
+    batch_count <span class="token operator">=</span> <span class="token number">0</span>   
+    <span class="token keyword">for</span> i<span class="token punctuation">,</span> s <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>signal_train<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        
+        <span class="token comment"># 取一个变长序列</span>
+        start <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token number">3</span><span class="token punctuation">)</span>
+        end <span class="token operator">=</span> np<span class="token punctuation">.</span>random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token number">3</span> <span class="token operator">+</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        s <span class="token operator">=</span> s<span class="token punctuation">[</span>start<span class="token punctuation">:</span> end<span class="token punctuation">]</span>
+        
+        <span class="token comment"># 将变长的输入序列赋给RNN的各输入向量节点</span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            inputs<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">.</span>set_value<span class="token punctuation">(</span>np<span class="token punctuation">.</span>mat<span class="token punctuation">(</span>s<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>T<span class="token punctuation">)</span>    
+        
+        <span class="token comment"># 将临时的最后一个时刻与全连接网络焊接</span>
+        welding_point<span class="token punctuation">.</span>weld<span class="token punctuation">(</span>hiddens<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        
+        label<span class="token punctuation">.</span>set_value<span class="token punctuation">(</span>np<span class="token punctuation">.</span>mat<span class="token punctuation">(</span>label_train<span class="token punctuation">[</span>i<span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span>T<span class="token punctuation">)</span>
+        
+        optimizer<span class="token punctuation">.</span>one_step<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        
+        batch_count <span class="token operator">+=</span> <span class="token number">1</span>
+        <span class="token keyword">if</span> batch_count <span class="token operator">>=</span> batch_size<span class="token punctuation">:</span>
+            
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"epoch: &#123;:d&#125;, iteration: &#123;:d&#125;, loss: &#123;:.3f&#125;"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>epoch <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> loss<span class="token punctuation">.</span>value<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+            
+            optimizer<span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            batch_count <span class="token operator">=</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>训练过程为：首先为30个<code>epoch</code>，其次<code>batch_size</code>为16；然后每个样本有<code>start: end</code>个序列（时刻）（这个序列是不定长的，但每个时刻的长度是相同的），将不定长的序列送入模型中，然后hiddens会保存所有中间过程，hiddens的末尾就是最后的输出，将hiddens[末尾index]连接上weling，再跑一遍全连接</p>
 
       
     </div>
