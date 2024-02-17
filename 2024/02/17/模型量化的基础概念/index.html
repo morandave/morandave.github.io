@@ -21,17 +21,20 @@
     var CONFIG = {"hostname":"morandave.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="分类">
-<meta property="og:url" content="https://morandave.github.io/categories/index.html">
+  <meta name="description" content="模型量化 模型加速的本质 量化能变快需要充分利用相应的低比特指令，量化≠更快，想变快一方面需要硬件指令支持，另一方面需要精心优化，这部分可以参考一些开源的推理库比如tnn ncnn mnn tengine，里面基本都有高效的8bit卷积实现 混合量化 混合量化：在模型加速和存储优化之间找到一个平衡点，结合了不同位数的量化方法，将模型中的不同参数以不同的精度进行表示。在混合量化中，通常将模">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模型量化的基础概念">
+<meta property="og:url" content="https://morandave.github.io/2024/02/17/%E6%A8%A1%E5%9E%8B%E9%87%8F%E5%8C%96%E7%9A%84%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/index.html">
 <meta property="og:site_name" content="斋">
+<meta property="og:description" content="模型量化 模型加速的本质 量化能变快需要充分利用相应的低比特指令，量化≠更快，想变快一方面需要硬件指令支持，另一方面需要精心优化，这部分可以参考一些开源的推理库比如tnn ncnn mnn tengine，里面基本都有高效的8bit卷积实现 混合量化 混合量化：在模型加速和存储优化之间找到一个平衡点，结合了不同位数的量化方法，将模型中的不同参数以不同的精度进行表示。在混合量化中，通常将模">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-08T15:15:46.000Z">
-<meta property="article:modified_time" content="2023-06-08T15:19:00.489Z">
+<meta property="article:published_time" content="2024-02-17T07:45:02.000Z">
+<meta property="article:modified_time" content="2024-02-17T07:45:02.597Z">
 <meta property="article:author" content="moran">
+<meta property="article:tag" content="模型量化">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://morandave.github.io/categories/">
+<link rel="canonical" href="https://morandave.github.io/2024/02/17/%E6%A8%A1%E5%9E%8B%E9%87%8F%E5%8C%96%E7%9A%84%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">
 
 
 <script id="page-configurations">
@@ -39,13 +42,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>分类 | 斋
-</title>
+  <title>模型量化的基础概念 | 斋</title>
   
 
 
@@ -172,55 +174,142 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="zh-CN">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">分类
-</h1>
-
-<div class="post-meta">
   
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://morandave.github.io/2024/02/17/%E6%A8%A1%E5%9E%8B%E9%87%8F%E5%8C%96%E7%9A%84%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.png">
+      <meta itemprop="name" content="moran">
+      <meta itemprop="description" content="选择有时候比努力更重要">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="斋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          模型量化的基础概念
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-02-17 15:45:02" itemprop="dateCreated datePublished" datetime="2024-02-17T15:45:02+08:00">2024-02-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A8%A1%E5%9E%8B%E9%87%8F%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">模型量化</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="模型量化">模型量化</h1>
+<h2 id="模型加速的本质">模型加速的本质</h2>
+<p>量化能变快需要充分利用相应的低比特指令，量化≠更快，想变快一方面需要硬件指令支持，另一方面需要精心优化，这部分可以参考一些开源的推理库比如tnn
+ncnn mnn tengine，里面基本都有高效的8bit卷积实现</p>
+<h1 id="混合量化">混合量化</h1>
+<p>混合量化：在模型加速和存储优化之间找到一个平衡点，结合了不同位数的量化方法，将模型中的不同参数以不同的精度进行表示。在混合量化中，通常将模型的权重和激活值以不同的精度进行表示。一种常见的做法是将模型的权重使用较低的位数（如8位）进行量化，以减少存储需求并提高计算效率。而对于激活值，可以选择使用更高的位数（如32位）以保留更多的精度，因为激活值的准确性对模型的性能影响更大。</p>
+<p>混合量化的优势在于它可以在保持相对较高的模型性能的同时，实现更好的加速效果。通过将权重进行较低位数的量化，可以减少内存带宽和计算开销，从而加快模型的推理速度。而较高位数的激活值能够保留更多的信息，有助于提高模型的准确性。</p>
+<p>fp：FP是固定点Fixed-Point的缩写，指的是在计算机中使用固定位数的小数表示实数。与浮点数相比，固定点数具有固定的小数位数，可以在计算机中更高效地存储和处理。</p>
+<p>8-bit：通常情况下，权重和激活值在深度学习中使用浮点数表示，但通过量化技术，可以将它们表示为更低位数的整数，如8位。</p>
+<p>activation fp, weight
+8bit的话加速空间应该很小，指令上应该也没有很好的支持：如果将激活值表示为固定位小数，而将权重表示为8位整数，那么将很难在模型加速方面获得显著的改进空间。</p>
+<p>QAT（量化感知训练）：QAT
+是一种用于训练量化模型的技术。在传统的深度学习训练过程中，模型的权重和激活值通常使用浮点数进行计算和更新。但是，在
+QAT
+中，模型在训练过程中会经历一个额外的量化仿真阶段。在这个阶段，模型会使用量化操作来模拟后续的量化过程，将权重和激活值表示为低位整数。通过在仿真阶段考虑量化的影响，模型可以更好地适应量化后的训练和推理过程，从而提高量化后模型的准确性。</p>
+<p>PTQ：训练后量化技术</p>
+<p>加速空间主要是看优化的程度，QAT和PTQ是不影响优化结果的快慢的</p>
+<h3 id="反量化">反量化</h3>
+<p>反量化（Dequantization）是量化的逆过程，即将量化后的整数表示恢复为浮点数或高精度表示的过程。在深度学习中，反量化通常是量化模型在推理过程中必要的步骤。</p>
+<p>当深度学习模型经过量化，权重和激活值被表示为低位整数（如8位或4位）时，模型的推理过程需要将这些整数恢复为浮点数，以进行准确的计算。反量化过程使用预定义的缩放因子（Scale
+Factor）和零点（Zero
+Point）来还原量化后的数值。缩放因子用于恢复数值的范围，而零点表示整数零对应的浮点数。</p>
+<p>通过反量化，模型可以在推理过程中使用浮点数进行计算，以保持相对较高的精度。这对于需要更高精度的模型层，如某些激活函数或后续的操作，尤其是在混合精度量化中，非常重要。反量化确保模型在量化和反量化之间能够正确地转换数值，从而在推理过程中保持模型的准确性。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>moran
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://morandave.github.io/2024/02/17/%E6%A8%A1%E5%9E%8B%E9%87%8F%E5%8C%96%E7%9A%84%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" title="模型量化的基础概念">https://morandave.github.io/2024/02/17/模型量化的基础概念/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 </div>
 
-</header>
 
-      
-      
-      
-      <div class="post-body">
-          <div class="category-all-page">
-            <div class="category-all-title">
-              目前共计 5 个分类
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Conclusion/">Conclusion</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/deep-learning-framework/">deep learning framework</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%A8%A1%E5%9E%8B%E9%87%8F%E5%8C%96/">模型量化</a><span class="category-list-count">1</span></li></ul>
-            </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%A8%A1%E5%9E%8B%E9%87%8F%E5%8C%96/" rel="tag"># 模型量化</a>
           </div>
-        
-      </div>
-      
-      
-      
-    </div>
-    
 
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/30/RNN%E7%9A%84%E5%AE%9E%E7%8E%B0/" rel="prev" title="RNN">
+      <i class="fa fa-chevron-left"></i> RNN
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
     
-    
-    
+  </article>
+  
+  
+  
+
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -267,6 +356,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E9%87%8F%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">模型量化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%8A%A0%E9%80%9F%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="nav-number">1.1.</span> <span class="nav-text">模型加速的本质</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%B7%E5%90%88%E9%87%8F%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">混合量化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E9%87%8F%E5%8C%96"><span class="nav-number">2.0.1.</span> <span class="nav-text">反量化</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -458,6 +548,25 @@
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'be088b78ef61edc11ba7',
+      clientSecret: '7aa8fccc469d4727ec79380b3380563f1537ea7b',
+      repo        : 'morandave.github.io',
+      owner       : 'morandave',
+      admin       : ['morandave'],
+      id          : 'eee1c45fce2481401786f96e7a4a43f6',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>
